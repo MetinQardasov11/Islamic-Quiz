@@ -1,0 +1,521 @@
+{% extends 'base.html' %}
+
+{% block title %}Profilim - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:index' %}'">
+                <i class="ph ph-house"></i>
+                Ana Sayfa
+            </button>
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:quizzes' %}'">
+                <i class="ph ph-grid-four"></i>
+                Quizler
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="profile">
+    <div class="profile__container">
+
+        <div class="profile__header-card">
+            <div class="profile__avatar">
+                <i class="ph ph-user-circle"></i>
+            </div>
+            <div class="profile__identity">
+                <h1 class="profile__name" id="profileName">Ahmet Yılmaz</h1>
+                <p class="profile__email" id="profileEmail">ahmet@mail.com</p>
+                <p class="profile__joined">
+                    <i class="ph ph-calendar-blank"></i>
+                    Katılım: Mart 2026
+                </p>
+            </div>
+            <div class="profile__quick-stats">
+                <div class="profile__stat">
+                    <span class="profile__stat-value" id="totalQuizzes">12</span>
+                    <span class="profile__stat-label">Quiz Çözüldü</span>
+                </div>
+                <div class="profile__stat">
+                    <span class="profile__stat-value" id="avgScore">78%</span>
+                    <span class="profile__stat-label">Ortalama Skor</span>
+                </div>
+                <div class="profile__stat">
+                    <span class="profile__stat-value" id="totalCorrect">48</span>
+                    <span class="profile__stat-label">Doğru Cevap</span>
+                </div>
+                <div class="profile__stat">
+                    <span class="profile__stat-value" id="bestScore">95%</span>
+                    <span class="profile__stat-label">En İyi Skor</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile__grid">
+
+            <section class="profile__section profile__section--wide">
+                <h2 class="profile__section-title">
+                    <i class="ph ph-chart-bar"></i>
+                    Quiz İstatistikleri
+                </h2>
+                <div class="profile__stats-grid">
+                    <div class="profile__detail-card">
+                        <div class="profile__detail-icon profile__detail-icon--brand">
+                            <i class="ph ph-trophy"></i>
+                        </div>
+                        <div>
+                            <p class="profile__detail-label">Geçilen Quiz</p>
+                            <p class="profile__detail-value" id="passedQuizzes">9</p>
+                        </div>
+                    </div>
+                    <div class="profile__detail-card">
+                        <div class="profile__detail-icon profile__detail-icon--danger">
+                            <i class="ph ph-x-circle"></i>
+                        </div>
+                        <div>
+                            <p class="profile__detail-label">Kalınan Quiz</p>
+                            <p class="profile__detail-value" id="failedQuizzes">3</p>
+                        </div>
+                    </div>
+                    <div class="profile__detail-card">
+                        <div class="profile__detail-icon profile__detail-icon--accent">
+                            <i class="ph ph-clock-countdown"></i>
+                        </div>
+                        <div>
+                            <p class="profile__detail-label">Toplam Süre</p>
+                            <p class="profile__detail-value" id="totalTime">18 dk</p>
+                        </div>
+                    </div>
+                    <div class="profile__detail-card">
+                        <div class="profile__detail-icon profile__detail-icon--success">
+                            <i class="ph ph-percent"></i>
+                        </div>
+                        <div>
+                            <p class="profile__detail-label">Başarı Oranı</p>
+                            <p class="profile__detail-value" id="successRate">75%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile__section">
+                <h2 class="profile__section-title">
+                    <i class="ph ph-star"></i>
+                    Kategori Performansı
+                </h2>
+                <div class="profile__category-list" id="categoryPerformance">
+                    <div class="profile__category-item">
+                        <span class="profile__category-name">Teknoloji</span>
+                        <div class="profile__category-bar">
+                            <div class="profile__category-fill" style="width: 85%"></div>
+                        </div>
+                        <span class="profile__category-score">85%</span>
+                    </div>
+                    <div class="profile__category-item">
+                        <span class="profile__category-name">Bilim</span>
+                        <div class="profile__category-bar">
+                            <div class="profile__category-fill" style="width: 72%"></div>
+                        </div>
+                        <span class="profile__category-score">72%</span>
+                    </div>
+                    <div class="profile__category-item">
+                        <span class="profile__category-name">Tarih</span>
+                        <div class="profile__category-bar">
+                            <div class="profile__category-fill" style="width: 68%"></div>
+                        </div>
+                        <span class="profile__category-score">68%</span>
+                    </div>
+                    <div class="profile__category-item">
+                        <span class="profile__category-name">Genel Kültür</span>
+                        <div class="profile__category-bar">
+                            <div class="profile__category-fill" style="width: 90%"></div>
+                        </div>
+                        <span class="profile__category-score">90%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile__section">
+                <h2 class="profile__section-title">
+                    <i class="ph ph-clock-counter-clockwise"></i>
+                    Son Quizler
+                </h2>
+                <div class="profile__history" id="quizHistory">
+                    <div class="profile__history-item">
+                        <div class="profile__history-info">
+                            <p class="profile__history-title">JavaScript Temelleri</p>
+                            <p class="profile__history-meta">Teknoloji · Kolay · 5 soru</p>
+                        </div>
+                        <span class="profile__history-score profile__history-score--pass">90%</span>
+                    </div>
+                    <div class="profile__history-item">
+                        <div class="profile__history-info">
+                            <p class="profile__history-title">Dünya Tarihi</p>
+                            <p class="profile__history-meta">Tarih · Orta · 8 soru</p>
+                        </div>
+                        <span class="profile__history-score profile__history-score--pass">75%</span>
+                    </div>
+                    <div class="profile__history-item">
+                        <div class="profile__history-info">
+                            <p class="profile__history-title">Fizik Yasaları</p>
+                            <p class="profile__history-meta">Bilim · Zor · 6 soru</p>
+                        </div>
+                        <span class="profile__history-score profile__history-score--fail">55%</span>
+                    </div>
+                    <div class="profile__history-item">
+                        <div class="profile__history-info">
+                            <p class="profile__history-title">Genel Kültür Testi</p>
+                            <p class="profile__history-meta">Genel Kültür · Kolay · 10 soru</p>
+                        </div>
+                        <span class="profile__history-score profile__history-score--pass">95%</span>
+                    </div>
+                </div>
+                <button class="btn btn--secondary profile__history-btn" onclick="window.location.href='{% url 'base:quizzes' %}'">
+                    <i class="ph ph-arrow-right"></i>
+                    Tüm Quizleri Gör
+                </button>
+            </section>
+
+            <section class="profile__section profile__section--wide">
+                <h2 class="profile__section-title">
+                    <i class="ph ph-gear"></i>
+                    Hesap Ayarları
+                </h2>
+
+                <div class="profile__settings">
+                    <div class="profile__setting-group">
+                        <h3 class="profile__setting-label">Görünüm</h3>
+                        <div class="profile__theme-switch">
+                            <button class="profile__theme-option" id="themeLightBtn" onclick="setProfileTheme('light')">
+                                <i class="ph ph-sun"></i>
+                                Açık Mod
+                            </button>
+                            <button class="profile__theme-option" id="themeDarkBtn" onclick="setProfileTheme('dark')">
+                                <i class="ph ph-moon"></i>
+                                Koyu Mod
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="profile__setting-group">
+                        <h3 class="profile__setting-label">Profil Bilgileri</h3>
+                        <form class="profile__info-form" id="profileInfoForm">
+                            <div class="profile__form-row">
+                                <div>
+                                    <label class="form-label" for="profileFullName">Ad Soyad</label>
+                                    <div class="form-field--icon">
+                                        <i class="ph ph-user"></i>
+                                        <input id="profileFullName" class="form-control" type="text"
+                                            value="Ahmet Yılmaz" placeholder="Ad Soyad">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="profileEmailInput">E-posta</label>
+                                    <div class="form-field--icon">
+                                        <i class="ph ph-envelope-simple"></i>
+                                        <input id="profileEmailInput" class="form-control" type="email"
+                                            value="ahmet@mail.com" placeholder="E-posta adresi">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn--primary">
+                                <i class="ph ph-floppy-disk"></i>
+                                Bilgileri Kaydet
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="profile__setting-group">
+                        <h3 class="profile__setting-label">Şifre Değiştir</h3>
+                        <form class="profile__password-form" id="passwordChangeForm">
+                            <div class="profile__form-row">
+                                <div>
+                                    <label class="form-label" for="currentPassword">Mevcut Şifre</label>
+                                    <div class="form-field--icon">
+                                        <i class="ph ph-lock"></i>
+                                        <input id="currentPassword" class="form-control" type="password"
+                                            required minlength="6" placeholder="Mevcut şifreniz">
+                                        <button type="button" class="form-field__action toggle-pw-btn"
+                                            data-target="currentPassword" aria-label="Şifre görünürlüğünü değiştir">
+                                            <i class="ph ph-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div></div>
+                            </div>
+                            <div class="profile__form-row">
+                                <div>
+                                    <label class="form-label" for="newPassword">Yeni Şifre</label>
+                                    <div class="form-field--icon">
+                                        <i class="ph ph-lock-key"></i>
+                                        <input id="newPassword" class="form-control" type="password"
+                                            required minlength="6" placeholder="En az 6 karakter">
+                                        <button type="button" class="form-field__action toggle-pw-btn"
+                                            data-target="newPassword" aria-label="Şifre görünürlüğünü değiştir">
+                                            <i class="ph ph-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="confirmNewPassword">Yeni Şifre Tekrar</label>
+                                    <div class="form-field--icon">
+                                        <i class="ph ph-lock-key"></i>
+                                        <input id="confirmNewPassword" class="form-control" type="password"
+                                            required minlength="6" placeholder="Yeni şifreyi tekrar girin">
+                                        <button type="button" class="form-field__action toggle-pw-btn"
+                                            data-target="confirmNewPassword" aria-label="Şifre görünürlüğünü değiştir">
+                                            <i class="ph ph-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="pwChangeError" class="profile__form-error"></p>
+                            <p id="pwChangeSuccess" class="profile__form-success"></p>
+                            <button type="submit" class="btn btn--primary">
+                                <i class="ph ph-key"></i>
+                                Şifreyi Güncelle
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="profile__setting-group">
+                        <h3 class="profile__setting-label">Hesap İşlemleri</h3>
+                        <div class="profile__account-actions">
+                            <button class="btn btn--secondary" onclick="handleLogout()">
+                                <i class="ph ph-sign-out"></i>
+                                Çıkış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+<!-- Giriş Yapma Uyarı Modalı -->
+<div class="login-modal" id="loginRequiredModal" hidden>
+    <div class="login-modal__overlay"></div>
+    <div class="login-modal__content">
+        <div class="login-modal__icon">
+            <i class="ph ph-warning-circle"></i>
+        </div>
+        <h2 class="login-modal__title">Giriş Yapmanız Gerekiyor</h2>
+        <p class="login-modal__text">
+            Bir sınava girebilmek için önce hesabınıza giriş yapmanız gerekmektedir. Lütfen giriş yapın veya yeni bir hesap oluşturun.
+        </p>
+        <div class="login-modal__actions">
+            <button class="btn btn--primary" onclick="window.location.href='{% url 'authentication:login' %}'">
+                <i class="ph ph-sign-in"></i>
+                Giriş Yap
+            </button>
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'authentication:register' %}'">
+                <i class="ph ph-user-plus"></i>
+                Kayıt Ol
+            </button>
+            <button class="btn btn--secondary" onclick="closeLoginModal()">
+                <i class="ph ph-x"></i>
+                Kapat
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_copy %}Profilini yönet, ilerlemeni takip et.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function setProfileTheme(theme) {
+        applyTheme(theme);
+        const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+        themeToggleButtons.forEach(btn => updateThemeToggle(btn, theme));
+        updateThemeButtons(theme);
+    }
+
+    function updateThemeButtons(theme) {
+        const lightBtn = document.getElementById('themeLightBtn');
+        const darkBtn = document.getElementById('themeDarkBtn');
+        if (lightBtn && darkBtn) {
+            lightBtn.classList.toggle('is-active', theme === 'light');
+            darkBtn.classList.toggle('is-active', theme === 'dark');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = document.body.classList.contains('theme-dark') ? 'dark' : 'light';
+        updateThemeButtons(currentTheme);
+        loadProfileData();
+    });
+
+    document.querySelectorAll('.toggle-pw-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.dataset.target;
+            const input = document.getElementById(targetId);
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            btn.innerHTML = isPassword ? '<i class="ph ph-eye-slash"></i>' : '<i class="ph ph-eye"></i>';
+        });
+    });
+
+    const pwForm = document.getElementById('passwordChangeForm');
+    const pwError = document.getElementById('pwChangeError');
+    const pwSuccess = document.getElementById('pwChangeSuccess');
+
+    pwForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        pwError.textContent = '';
+        pwSuccess.textContent = '';
+
+        const current = document.getElementById('currentPassword').value;
+        const newPw = document.getElementById('newPassword').value;
+        const confirmPw = document.getElementById('confirmNewPassword').value;
+
+        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
+
+        if (userData.password && current !== userData.password) {
+            pwError.textContent = 'Mevcut şifre yanlış.';
+            return;
+        }
+
+        if (newPw !== confirmPw) {
+            pwError.textContent = 'Yeni şifreler eşleşmiyor.';
+            return;
+        }
+
+        if (newPw.length < 6) {
+            pwError.textContent = 'Şifre en az 6 karakter olmalıdır.';
+            return;
+        }
+
+        userData.password = newPw;
+        localStorage.setItem('quizflow-user', JSON.stringify(userData));
+        pwSuccess.textContent = 'Şifreniz başarıyla güncellendi!';
+        pwForm.reset();
+    });
+
+    const infoForm = document.getElementById('profileInfoForm');
+    infoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('profileFullName').value.trim();
+        const email = document.getElementById('profileEmailInput').value.trim();
+
+        if (!name || !email) return;
+
+        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
+        userData.name = name;
+        userData.email = email;
+        localStorage.setItem('quizflow-user', JSON.stringify(userData));
+
+        document.getElementById('profileName').textContent = name;
+        document.getElementById('profileEmail').textContent = email;
+
+        alert('Profil bilgileri güncellendi!');
+    });
+
+    function handleLogout() {
+        localStorage.removeItem('quizflow-logged-in');
+        window.location.href = '{% url "authentication:login" %}';
+    }
+
+    function loadProfileData() {
+        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
+        const isLoggedIn = localStorage.getItem('quizflow-logged-in') === 'true';
+
+        if (!isLoggedIn) {
+            window.location.href = '{% url "authentication:login" %}';
+            return;
+        }
+
+        if (userData.name) {
+            document.getElementById('profileName').textContent = userData.name;
+            document.getElementById('profileFullName').value = userData.name;
+        }
+        if (userData.email) {
+            document.getElementById('profileEmail').textContent = userData.email;
+            document.getElementById('profileEmailInput').value = userData.email;
+        }
+
+        const quizHistory = JSON.parse(localStorage.getItem('quizflow-history') || '[]');
+        if (quizHistory.length > 0) {
+            const total = quizHistory.length;
+            const passed = quizHistory.filter(q => q.score >= 70).length;
+            const failed = total - passed;
+            const avgScore = Math.round(quizHistory.reduce((a, b) => a + b.score, 0) / total);
+            const bestScore = Math.max(...quizHistory.map(q => q.score));
+            const totalCorrect = quizHistory.reduce((a, b) => a + (b.correct || 0), 0);
+
+            document.getElementById('totalQuizzes').textContent = total;
+            document.getElementById('avgScore').textContent = avgScore + '%';
+            document.getElementById('totalCorrect').textContent = totalCorrect;
+            document.getElementById('bestScore').textContent = bestScore + '%';
+            document.getElementById('passedQuizzes').textContent = passed;
+            document.getElementById('failedQuizzes').textContent = failed;
+            document.getElementById('successRate').textContent = Math.round((passed / total) * 100) + '%';
+
+            const historyContainer = document.getElementById('quizHistory');
+            historyContainer.innerHTML = quizHistory.slice(-4).reverse().map(q => `
+                <div class="profile__history-item">
+                    <div class="profile__history-info">
+                        <p class="profile__history-title">${escapeHtml(q.title || 'Quiz')}</p>
+                        <p class="profile__history-meta">${escapeHtml(q.category || '')} · ${escapeHtml(q.difficulty || '')} · ${q.totalQuestions || 0} soru</p>
+                    </div>
+                    <span class="profile__history-score profile__history-score--${q.score >= 70 ? 'pass' : 'fail'}">${q.score}%</span>
+                </div>
+            `).join('');
+
+            const categories = {};
+            quizHistory.forEach(q => {
+                if (q.category) {
+                    if (!categories[q.category]) categories[q.category] = [];
+                    categories[q.category].push(q.score);
+                }
+            });
+
+            const catContainer = document.getElementById('categoryPerformance');
+            const catEntries = Object.entries(categories);
+            if (catEntries.length > 0) {
+                catContainer.innerHTML = catEntries.map(([name, scores]) => {
+                    const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+                    return `
+                        <div class="profile__category-item">
+                            <span class="profile__category-name">${escapeHtml(name)}</span>
+                            <div class="profile__category-bar">
+                                <div class="profile__category-fill" style="width: ${avg}%"></div>
+                            </div>
+                            <span class="profile__category-score">${avg}%</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+    }
+
+    function closeLoginModal() {
+        document.getElementById('loginRequiredModal').hidden = true;
+    }
+</script>
+{% endblock %}

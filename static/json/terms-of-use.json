@@ -1,0 +1,30 @@
+{
+  "terms": [
+    {
+      "title": "1. Adil Kullanım",
+      "description": "Hile amaçlı eklentiler, otomasyonlar ve diğer kullanıcıların deneyimini bozan davranışlar yasaktır."
+    },
+    {
+      "title": "2. İçerik Sorumluluğu",
+      "description": "Quiz içerikleri eğitsel amaçla sunulur. Hata veya eksikler için düzenli güncelleme yapılabilir."
+    },
+    {
+      "title": "3. Sonuç ve Değerlendirme",
+      "description": "Skorlar bilgilendirme amaçlıdır; resmî sertifika ya da akademik belge yerine geçmez."
+    },
+    {
+      "title": "4. Hizmet Güncellemeleri",
+      "description": "Arayüz, soru setleri ve puanlama kuralları hizmet kalitesi için bildirimsiz güncellenebilir."
+    },
+    {
+      "title": "5. Hesap ve Güvenlik",
+      "description": "Hesap bilgilerini güvenli tutmak kullanıcının sorumluluğundadır. Şüpheli durumlarda şifreni yenile."
+    }
+  ],
+  "note": {
+    "prefix": "QuizFlow'u kullanarak bu kuralları kabul etmiş sayılırsın. Detaylı bilgi için",
+    "linkLabel": "SSS sayfasına",
+    "linkHref": "sss.html",
+    "suffix": "da göz atabilirsin."
+  }
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Sıkça Sorulan Sorular - QuizFlow{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:index' %}'">
+                <i class="ph ph-house"></i>
+                Ana Sayfa
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="landing">
+    <section class="info-block">
+        <h1 class="info-block__title">Sıkça Sorulan Sorular</h1>
+        <p class="info-block__subtitle">
+            QuizFlow hakkında en çok sorulan soruları ve hızlı cevapları bu sayfada bulabilirsin.
+        </p>
+
+        <div id="faqList" class="faq-grid">
+            <details class="faq-item" open>
+                <summary>QuizFlow tam olarak ne sunuyor?</summary>
+                <p>
+                    Tek oyunculu quiz, iki oyunculu yarış ve sonuç analizi ekranlarıyla bilgi seviyeni ölçmeni
+                    sağlayan tarayıcı tabanlı bir deneyim sunar.
+                </p>
+            </details>
+            <details class="faq-item">
+                <summary>Skorlar nasıl hesaplanır?</summary>
+                <p>Doğru cevap sayısının toplam soru sayısına oranına göre yüzde skor hesaplanır.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Süre dolarsa ne olur?</summary>
+                <p>Süre bittiğinde quiz mevcut cevaplara göre otomatik tamamlanır ve sonuç ekranı açılır.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Hesap açmadan quiz çözebilir miyim?</summary>
+                <p>Evet, temel quiz akışlarını kullanabilirsin. Hesap açmak ilerleme takibi için avantaj sağlar.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Yanlış cevapları sonradan görebilir miyim?</summary>
+                <p>Evet, quiz bitiminde cevap analizi ekranından doğru ve yanlışlarını detaylı görebilirsin.</p>
+            </details>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Soruların varsa önce buraya bak, sonra quize devam et.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+{% endblock %}

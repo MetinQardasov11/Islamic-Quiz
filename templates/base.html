@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QuizFlow{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}theme-light{% endblock %}">
+
+    {% block header %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <footer class="site-footer" aria-label="Alt bilgi">
+        <div class="site-footer__brand">
+            <p class="site-footer__title">QuizFlow</p>
+            <p class="site-footer__copy">{% block footer_copy %}Bilgini güçlendiren modern quiz deneyimi.{% endblock %}</p>
+        </div>
+        <div class="site-footer__links">
+            {% block footer_links %}
+            <a class="site-footer__link" href="index.html">Ana Sayfa</a>
+            <a class="site-footer__link" href="quizzes.html">Quizler</a>
+            <a class="site-footer__link" href="profile.html">Profilim</a>
+            <a class="site-footer__link" href="sss.html">SSS</a>
+            <a class="site-footer__link" href="kullanim-sartlari.html">Kullanım Şartları</a>
+            {% endblock %}
+        </div>
+        <p class="site-footer__meta">QuizFlow (c) 2026</p>
+    </footer>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/app-core.js' %}"></script>
+    <script src="{% static 'js/app-quiz.js' %}"></script>
+    <script src="{% static 'js/app-multiplayer.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+
+</body>
+
+</html>

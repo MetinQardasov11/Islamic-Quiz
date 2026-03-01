@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}Kayıt Ol - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block body_class %}auth-page theme-light{% endblock %}
+
+{% block content %}
+<main class="auth">
+    <div class="auth__shell">
+        <section class="auth__panel">
+            <div class="auth__top">
+                <a class="auth-back" href="{% url 'base:index' %}">
+                    <i class="ph ph-arrow-left"></i>
+                    Ana Sayfaya Dön
+                </a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                    <i class="ph ph-moon"></i>
+                    <span data-theme-label>KOYU</span>
+                </button>
+            </div>
+            <span class="auth__eyebrow">
+                <i class="ph ph-sparkle"></i>
+                Kişiselleştirilmiş Öğrenme
+            </span>
+            <h1 class="auth__title">QuizFlow Hesabını Oluştur</h1>
+            <p class="auth__desc">
+                İlerlemeni takip etmek, hatalarını gözden geçirmek ve düzenli bir çalışma alışkanlığı kurmak için
+                katıl.
+            </p>
+            <div class="auth__metrics">
+                <article class="auth-metric">
+                    <p class="auth-metric__label">Akıllı Kategoriler</p>
+                    <p class="auth-metric__value">Teknoloji, Bilim, Genel Kültür ve daha fazlası</p>
+                </article>
+                <article class="auth-metric">
+                    <p class="auth-metric__label">İlerleme Takibi</p>
+                    <p class="auth-metric__value">Detaylı quiz sonrası analiz</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="auth__panel">
+            <h2 class="auth__heading">Hesap Oluştur</h2>
+            <p class="auth__subheading">Bir dakikadan kısa sürede QuizFlow yolculuğunu başlat.</p>
+
+            <form id="registerForm" class="auth-form" action="{% url 'base:quizzes' %}">
+                <label class="form-label" for="name">Ad Soyad</label>
+                <div class="form-field--icon">
+                    <i class="ph ph-user"></i>
+                    <input id="name" name="name" class="form-control" type="text" required
+                        placeholder="Ahmet Yılmaz">
+                </div>
+
+                <label class="form-label" for="email">E-posta</label>
+                <div class="form-field--icon">
+                    <i class="ph ph-envelope-simple"></i>
+                    <input id="email" name="email" class="form-control" type="email" required
+                        placeholder="ornek@mail.com">
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label class="form-label" for="password">Şifre</label>
+                        <input id="password" name="password" class="form-control" type="password" required
+                            minlength="6" placeholder="En az 6 karakter">
+                    </div>
+                    <div>
+                        <label class="form-label" for="confirmPassword">Şifre Tekrar</label>
+                        <input id="confirmPassword" name="confirmPassword" class="form-control" type="password"
+                            required minlength="6" placeholder="Şifreyi tekrar gir">
+                    </div>
+                </div>
+
+                <p id="passwordError"></p>
+
+                <label class="auth-form__check">
+                    <input type="checkbox" required>
+                    <a class="auth-link" href="{% url 'base:terms_of_use' %}">Kullanım şartlarını</a> ve
+                    <a class="auth-link" href="{% url 'base:faq' %}">SSS notlarını</a> kabul ediyorum.
+                </label>
+
+                <button type="submit" class="btn btn--primary btn--block">
+                    Hesap Oluştur
+                    <i class="ph ph-user-plus"></i>
+                </button>
+            </form>
+
+            <p class="auth__footer">
+                Zaten hesabın var mı?
+                <a href="{% url 'authentication:login' %}" class="auth-link">Giriş yap</a>
+            </p>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Kaydol ve quiz performansını düzenli takip etmeye başla.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const registerForm = document.getElementById('registerForm');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordError = document.getElementById('passwordError');
+
+    registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        passwordError.textContent = '';
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            passwordError.textContent = 'Şifreler eşleşmiyor.';
+            return;
+        }
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = passwordInput.value;
+
+        if (!name || !email || !password) return;
+
+        const userData = {
+            name: name,
+            email: email,
+            password: password,
+            joinDate: new Date().toISOString()
+        };
+
+        localStorage.setItem('quizflow-user', JSON.stringify(userData));
+        localStorage.setItem('quizflow-logged-in', 'true');
+        window.location.href = '{% url "base:quizzes" %}';
+    });
+</script>
+{% endblock %}

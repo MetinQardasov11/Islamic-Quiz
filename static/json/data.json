@@ -1,0 +1,1909 @@
+{
+    "quizzes": [
+        {
+            "id": "teknoloji-programlama",
+            "title": "Teknoloji ve Programlama",
+            "description": "Yazılım, internet ve modern teknolojiler hakkındaki bilgini ölç.",
+            "difficulty": "medium",
+            "category": "Teknoloji",
+            "thumbnail": "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "HTML kısaltmasının açılımı nedir?",
+                    "options": [
+                        "Hyper Text Markup Language",
+                        "High Tech Modern Language",
+                        "Home Tool Markup Language",
+                        "Hyperlink Transfer Markup Logic"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Web dünyasının temel programlama dili olarak hangisi bilinir?",
+                    "options": [
+                        "Python",
+                        "JavaScript",
+                        "C#",
+                        "Go"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 3,
+                    "question": "CSS'in temel görevi nedir?",
+                    "options": [
+                        "Veritabanı yönetmek",
+                        "Sunucu kurmak",
+                        "Sayfanın görünümünü biçimlendirmek",
+                        "Alan adı satın almak"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Git hangi amaçla kullanılır?",
+                    "options": [
+                        "Sürüm kontrolü",
+                        "Video düzenleme",
+                        "Sunucu kapatma",
+                        "Ağ izleme"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 5,
+                    "question": "404 HTTP durum kodu neyi ifade eder?",
+                    "options": [
+                        "Yetkisiz erişim",
+                        "Sunucu hatası",
+                        "Kaynak bulunamadı",
+                        "İstek başarılı"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 6,
+                    "question": "API ifadesinin doğru açılımı hangisidir?",
+                    "options": [
+                        "Application Programming Interface",
+                        "Advanced Program Integration",
+                        "Automated Public Internet",
+                        "Applied Protocol Instruction"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 7,
+                    "question": "Aşağıdakilerden hangisi NoSQL veritabanıdır?",
+                    "options": [
+                        "PostgreSQL",
+                        "MySQL",
+                        "MongoDB",
+                        "SQLite"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 8,
+                    "question": "Bir Git deposunu bilgisayarına çekmek için hangi komut kullanılır?",
+                    "options": [
+                        "git move",
+                        "git clone",
+                        "git push",
+                        "git branch"
+                    ],
+                    "correctAnswer": 1
+                }
+            ],
+            "subcategory": "Programlama"
+        },
+        {
+            "id": "bilim-doga",
+            "title": "Bilim ve Doğa",
+            "description": "Fizik, kimya, biyoloji ve doğa konularında hızını dene.",
+            "difficulty": "easy",
+            "category": "Bilim",
+            "thumbnail": "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Suyun kimyasal formülü hangisidir?",
+                    "options": [
+                        "O2",
+                        "H2O",
+                        "CO2",
+                        "NaCl"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Kızıl Gezegen olarak bilinen gezegen hangisidir?",
+                    "options": [
+                        "Mars",
+                        "Venüs",
+                        "Satürn",
+                        "Merkür"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 3,
+                    "question": "İnsan vücudunda yetişkin bir bireyde yaklaşık kaç kemik vardır?",
+                    "options": [
+                        "186",
+                        "196",
+                        "206",
+                        "216"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Bitkiler fotosentez sırasında atmosferden hangi gazı alır?",
+                    "options": [
+                        "Azot",
+                        "Oksijen",
+                        "Karbondioksit",
+                        "Helyum"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 5,
+                    "question": "Canlılığın en küçük yapı birimi hangisidir?",
+                    "options": [
+                        "Doku",
+                        "Hücre",
+                        "Atom",
+                        "Protein"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Görelilik teorisini geliştiren bilim insanı kimdir?",
+                    "options": [
+                        "Galileo Galilei",
+                        "Isaac Newton",
+                        "Albert Einstein",
+                        "Nikola Tesla"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 7,
+                    "question": "İnsan vücudundaki en büyük organ hangisidir?",
+                    "options": [
+                        "Karaciğer",
+                        "Beyin",
+                        "Deri",
+                        "Kalp"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 8,
+                    "question": "Dünya üzerindeki en sert doğal madde hangisidir?",
+                    "options": [
+                        "Demir",
+                        "Platin",
+                        "Kuvars",
+                        "Elmas"
+                    ],
+                    "correctAnswer": 3
+                }
+            ],
+            "subcategory": "Temel Bilimler"
+        },
+        {
+            "id": "genel-kultur",
+            "title": "Genel Kültür",
+            "description": "Tarih, kültür, edebiyat ve dünya bilgisi sorularıyla kendini test et.",
+            "difficulty": "medium",
+            "category": "Genel Kültür",
+            "thumbnail": "https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Fransa'nın başkenti neresidir?",
+                    "options": [
+                        "Paris",
+                        "Lyon",
+                        "Marsilya",
+                        "Nice"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Dünyanın en büyük okyanusu hangisidir?",
+                    "options": [
+                        "Atlas Okyanusu",
+                        "Hint Okyanusu",
+                        "Arktik Okyanusu",
+                        "Pasifik Okyanusu"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 3,
+                    "question": "II. Dünya Savaşı hangi yılda sona ermiştir?",
+                    "options": [
+                        "1943",
+                        "1944",
+                        "1945",
+                        "1946"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Mona Lisa tablosunun ressamı kimdir?",
+                    "options": [
+                        "Pablo Picasso",
+                        "Leonardo da Vinci",
+                        "Vincent van Gogh",
+                        "Michelangelo"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Dünyanın yüzölçümü bakımından en küçük ülkesi hangisidir?",
+                    "options": [
+                        "Monako",
+                        "Vatikan",
+                        "San Marino",
+                        "Lihtenştayn"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Romeo ve Juliet eserini kim yazmıştır?",
+                    "options": [
+                        "Charles Dickens",
+                        "William Shakespeare",
+                        "Jane Austen",
+                        "Victor Hugo"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 7,
+                    "question": "Güneşin Doğduğu Ülke olarak bilinen ülke hangisidir?",
+                    "options": [
+                        "Japonya",
+                        "Çin",
+                        "Tayland",
+                        "Kore"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 8,
+                    "question": "Dünyanın en yüksek dağı hangisidir?",
+                    "options": [
+                        "K2",
+                        "Ağrı Dağı",
+                        "Everest",
+                        "Denali"
+                    ],
+                    "correctAnswer": 2
+                }
+            ],
+            "subcategory": "Dünya Bilgisi"
+        },
+        {
+            "id": "tarih",
+            "title": "Tarih",
+            "description": "Antik çağdan modern döneme önemli olayları ve kişileri hatırla.",
+            "difficulty": "medium",
+            "category": "Tarih",
+            "thumbnail": "https://images.pexels.com/photos/6492403/pexels-photo-6492403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "İstanbul hangi yılda fethedilmiştir?",
+                    "options": [
+                        "1453",
+                        "1492",
+                        "1520",
+                        "1071"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Türkiye Cumhuriyeti hangi yılda ilan edilmiştir?",
+                    "options": [
+                        "1920",
+                        "1921",
+                        "1923",
+                        "1925"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Magna Carta hangi ülkede ortaya çıkmıştır?",
+                    "options": [
+                        "Fransa",
+                        "İngiltere",
+                        "Almanya",
+                        "İspanya"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "Sanayi Devrimi ilk olarak hangi ülkede başlamıştır?",
+                    "options": [
+                        "ABD",
+                        "Fransa",
+                        "İngiltere",
+                        "Hollanda"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 5,
+                    "question": "Osmanlı Devleti'nin kurucusu kimdir?",
+                    "options": [
+                        "Orhan Gazi",
+                        "Osman Gazi",
+                        "I. Murad",
+                        "Yıldırım Bayezid"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Amerika kıtasının 1492 yılındaki keşfiyle anılan denizci kimdir?",
+                    "options": [
+                        "Kristof Kolomb",
+                        "Vasco da Gama",
+                        "Ferdinand Magellan",
+                        "James Cook"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 7,
+                    "question": "Anadolu Selçuklu Devleti hangi savaş sonrası Anadolu'da güç kazanmıştır?",
+                    "options": [
+                        "Pasinler",
+                        "Malazgirt",
+                        "Miryokefalon",
+                        "Kosova"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 8,
+                    "question": "Birinci Dünya Savaşı hangi yıllar arasında gerçekleşmiştir?",
+                    "options": [
+                        "1910-1914",
+                        "1912-1916",
+                        "1914-1918",
+                        "1918-1922"
+                    ],
+                    "correctAnswer": 2
+                }
+            ],
+            "subcategory": "Dünya Tarihi"
+        },
+        {
+            "id": "cografya",
+            "title": "Coğrafya",
+            "description": "Kıtalar, ülkeler, iklimler ve doğal oluşumlar hakkında bilgini test et.",
+            "difficulty": "easy",
+            "category": "Coğrafya",
+            "thumbnail": "https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Dünyada kaç kıta vardır?",
+                    "options": [
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 2,
+                    "question": "Nil Nehri hangi kıtada bulunur?",
+                    "options": [
+                        "Asya",
+                        "Afrika",
+                        "Avrupa",
+                        "Güney Amerika"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 3,
+                    "question": "Türkiye'nin başkenti neresidir?",
+                    "options": [
+                        "İstanbul",
+                        "İzmir",
+                        "Ankara",
+                        "Bursa"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Sahara Çölü hangi kıtada yer alır?",
+                    "options": [
+                        "Afrika",
+                        "Asya",
+                        "Avustralya",
+                        "Kuzey Amerika"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 5,
+                    "question": "Aşağıdakilerden hangisi bir ada ülkesidir?",
+                    "options": [
+                        "Norveç",
+                        "Japonya",
+                        "Polonya",
+                        "Avusturya"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Ekvator çizgisi hangi yarımküreleri birbirinden ayırır?",
+                    "options": [
+                        "Doğu-Batı",
+                        "Kuzey-Güney",
+                        "Yukarı-Aşağı",
+                        "Kara-Deniz"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 7,
+                    "question": "Aşağıdaki denizlerden hangisi Türkiye kıyısında yer almaz?",
+                    "options": [
+                        "Karadeniz",
+                        "Akdeniz",
+                        "Hazar Denizi",
+                        "Ege Denizi"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 8,
+                    "question": "Dünyanın en uzun nehri olarak sıklıkla gösterilen nehir hangisidir?",
+                    "options": [
+                        "Tuna",
+                        "Mississippi",
+                        "Nil",
+                        "Ren"
+                    ],
+                    "correctAnswer": 2
+                }
+            ],
+            "subcategory": "Ulkeler ve Haritalar"
+        },
+        {
+            "id": "sanat-sinema",
+            "title": "Sanat ve Sinema",
+            "description": "Sinema, müzik, resim ve kültür dünyasına dair sorularla puan topla.",
+            "difficulty": "medium",
+            "category": "Sanat ve Sinema",
+            "thumbnail": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Oscar ödülleri hangi ülke merkezli bir sinema ödülüdür?",
+                    "options": [
+                        "İngiltere",
+                        "ABD",
+                        "Fransa",
+                        "İtalya"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Dünyaca ünlü Starry Night tablosu kime aittir?",
+                    "options": [
+                        "Claude Monet",
+                        "Salvador Dali",
+                        "Vincent van Gogh",
+                        "Edvard Munch"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Sinema tarihinde sesli film döneminin başlangıcını simgeleyen film hangisidir?",
+                    "options": [
+                        "The Jazz Singer",
+                        "Metropolis",
+                        "Casablanca",
+                        "Citizen Kane"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 4,
+                    "question": "Mozart hangi dönemin önemli bestecilerindendir?",
+                    "options": [
+                        "Barok",
+                        "Klasik",
+                        "Romantik",
+                        "Modern"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Türk sinemasında Yeşilçam terimi en çok neyi ifade eder?",
+                    "options": [
+                        "Bir film türünü",
+                        "Bir ödül törenini",
+                        "Türk sinema endüstrisini",
+                        "Bir sinema okulunu"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 6,
+                    "question": "Aşağıdakilerden hangisi bir müzik notasının adıdır?",
+                    "options": [
+                        "Sol",
+                        "Dol",
+                        "Kol",
+                        "Bol"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 7,
+                    "question": "Matrix filmi ilk kez hangi yılda yayımlanmıştır?",
+                    "options": [
+                        "1999",
+                        "2001",
+                        "2003",
+                        "1995"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 8,
+                    "question": "Bir filmin çekim öncesi plan çizimlerine ne ad verilir?",
+                    "options": [
+                        "Senkron",
+                        "Storyboard",
+                        "Montaj",
+                        "Render"
+                    ],
+                    "correctAnswer": 1
+                }
+            ],
+            "subcategory": "Sinema ve Sanat"
+        },
+        {
+            "id": "spor",
+            "title": "Spor Dünyası",
+            "description": "Futbol, basketbol ve farklı spor dallarıyla ilgili hızlı sorular.",
+            "difficulty": "easy",
+            "category": "Spor",
+            "thumbnail": "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Bir futbol takımı sahada kaç oyuncu ile mücadele eder?",
+                    "options": [
+                        "9",
+                        "10",
+                        "11",
+                        "12"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 2,
+                    "question": "Basketbolda üç sayı çizgisinin dışından atılan başarılı şut kaç puandır?",
+                    "options": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Teniste bir seti kazanmak için genellikle en az kaç oyun gerekir?",
+                    "options": [
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Olimpiyat oyunları normal şartlarda kaç yılda bir düzenlenir?",
+                    "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 5,
+                    "question": "Voleybol takımında sahada aynı anda kaç oyuncu bulunur?",
+                    "options": [
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Maraton koşusunun resmi mesafesi kaç kilometredir?",
+                    "options": [
+                        "21.1",
+                        "32.0",
+                        "42.195",
+                        "50.0"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 7,
+                    "question": "Aşağıdakilerden hangisi bir yüzme stili değildir?",
+                    "options": [
+                        "Serbest",
+                        "Kelebek",
+                        "Kurbağalama",
+                        "Dalgalama"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 8,
+                    "question": "Bir futbol maçının normal süresi uzatmalar hariç kaç dakikadır?",
+                    "options": [
+                        "80",
+                        "90",
+                        "100",
+                        "120"
+                    ],
+                    "correctAnswer": 1
+                }
+            ],
+            "subcategory": "Takim ve Bireysel"
+        },
+        {
+            "id": "resimli-quiz",
+            "title": "Resimli Dünya Bilgisi",
+            "description": "Görsellerden yapıları ve ülkeleri tanıyıp doğru cevabı seç.",
+            "difficulty": "medium",
+            "category": "Resimli Quiz",
+            "thumbnail": "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 75,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Görseldeki yapı hangi şehirde bulunur?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
+                    "imageAlt": "Eyfel Kulesi",
+                    "imageCaption": "Eyfel Kulesi",
+                    "options": [
+                        "Roma",
+                        "Paris",
+                        "Madrid",
+                        "Berlin"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Görseldeki tarihi yapı hangi ülkededir?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6f/GreatWallBadaling.jpg",
+                    "imageAlt": "Çin Seddi",
+                    "imageCaption": "Çin Seddi",
+                    "options": [
+                        "Çin",
+                        "Japonya",
+                        "Moğolistan",
+                        "Kore"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 3,
+                    "question": "Görseldeki piramitler hangi ülkede yer alır?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Kheops-Pyramid.jpg",
+                    "imageAlt": "Gize Piramitleri",
+                    "imageCaption": "Gize Piramitleri",
+                    "options": [
+                        "Meksika",
+                        "Mısır",
+                        "Ürdün",
+                        "Yunanistan"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "Görseldeki amfitiyatro hangi şehirdedir?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/d/de/Colosseo_2020.jpg",
+                    "imageAlt": "Kolezyum",
+                    "imageCaption": "Kolezyum",
+                    "options": [
+                        "Atina",
+                        "Roma",
+                        "Venedik",
+                        "Floransa"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Görseldeki Özgürlük Heykeli hangi ülkededir?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Statue_of_Liberty_7.jpg",
+                    "imageAlt": "Özgürlük Heykeli",
+                    "imageCaption": "Özgürlük Heykeli",
+                    "options": [
+                        "Kanada",
+                        "ABD",
+                        "İngiltere",
+                        "Avustralya"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Görseldeki yapı hangi şehirde bulunur?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg",
+                    "imageAlt": "Tac Mahal",
+                    "imageCaption": "Tac Mahal",
+                    "options": [
+                        "Yeni Delhi",
+                        "Agra",
+                        "Mumbai",
+                        "Lahor"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 7,
+                    "question": "Görselde görülen dağ hangi ülkede yer alır?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Fuji_from_Hotel_Mt_Fuji_2015-2-12.jpg",
+                    "imageAlt": "Fuji Dağı",
+                    "imageCaption": "Fuji Dağı",
+                    "options": [
+                        "Japonya",
+                        "Çin",
+                        "Nepal",
+                        "Endonezya"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 8,
+                    "question": "Görseldeki tarihi yapı hangi şehirde bulunur?",
+                    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Hagia_Sophia_Mars_2013.jpg",
+                    "imageAlt": "Ayasofya",
+                    "imageCaption": "Ayasofya",
+                    "options": [
+                        "Kudüs",
+                        "Atina",
+                        "İstanbul",
+                        "Kahire"
+                    ],
+                    "correctAnswer": 2
+                }
+            ],
+            "subcategory": "Görsel Bilgi"
+        },
+        {
+            "id": "din-temel-bilgiler",
+            "title": "Din: Temel Bilgiler",
+            "description": "Temel dini kavramlar, ibadetler ve genel bilgiler.",
+            "difficulty": "easy",
+            "category": "Din",
+            "subcategory": "Temel Bilgiler",
+            "thumbnail": "https://images.pexels.com/photos/7249293/pexels-photo-7249293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "İslam'ın kutsal kitabı hangisidir?",
+                    "options": [
+                        "Tevrat",
+                        "Incil",
+                        "Kur'an-ı Kerim",
+                        "Zebur"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 2,
+                    "question": "İslam'ın şartları kaç tanedir?",
+                    "options": [
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Günlük farz namaz sayısı kaçtır?",
+                    "options": [
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Ramazan ayında yerine getirilen ibadet hangisidir?",
+                    "options": [
+                        "Hac",
+                        "Oruc",
+                        "Kurban",
+                        "Umre"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Hicri takvim hangi olayla başlar?",
+                    "options": [
+                        "Mirac",
+                        "Hicret",
+                        "Bedir Savaşı",
+                        "Veda Hutbesi"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Zekat hangi amacla verilir?",
+                    "options": [
+                        "Sadece bayram kutlamak",
+                        "Ihtiyac sahiplerine destek olmak",
+                        "Spor faaliyetlerini artirmak",
+                        "Yolculuğa çıkmak"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 7,
+                    "question": "Kâbe hangi şehirde bulunur?",
+                    "options": [
+                        "Medine",
+                        "Kudüs",
+                        "Mekke",
+                        "Taif"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 8,
+                    "question": "Gonullu olarak yapilan maddi yardima ne denir?",
+                    "options": [
+                        "Sadaka",
+                        "Miras",
+                        "Sefer",
+                        "Teblig"
+                    ],
+                    "correctAnswer": 0
+                }
+            ]
+        },
+        {
+            "id": "din-peygamberler-siyer",
+            "title": "Din: Peygamberler ve Siyer",
+            "description": "Peygamberler tarihi ve siyer bilgilerini ölç.",
+            "difficulty": "medium",
+            "category": "Din",
+            "subcategory": "Peygamberler",
+            "thumbnail": "https://images.pexels.com/photos/7249292/pexels-photo-7249292.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "İslam inancına göre son peygamber kimdir?",
+                    "options": [
+                        "Hz. Musa",
+                        "Hz. Isa",
+                        "Hz. Muhammed",
+                        "Hz. Ibrahim"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 2,
+                    "question": "Hz. Musa'ya verilen ilahi kitap hangisidir?",
+                    "options": [
+                        "Incil",
+                        "Zebur",
+                        "Tevrat",
+                        "Kur'an"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Hz. Isa'ya verilen kitap hangisidir?",
+                    "options": [
+                        "Tevrat",
+                        "Incil",
+                        "Zebur",
+                        "Suhuf"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "Gemi ile anılan peygamber kimdir?",
+                    "options": [
+                        "Hz. Nuh",
+                        "Hz. Lut",
+                        "Hz. Salih",
+                        "Hz. Hud"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 5,
+                    "question": "Hicret olayı hangi şehre yapılmıştır?",
+                    "options": [
+                        "Mekke",
+                        "Medine",
+                        "Sam",
+                        "Kudüs"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Hz. Muhammed hangi şehirde doğmuştur?",
+                    "options": [
+                        "Mekke",
+                        "Medine",
+                        "Taif",
+                        "Kufe"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 7,
+                    "question": "Hz. Muhammed için kullanılan \"el-Emin\" ifadesi ne anlatır?",
+                    "options": [
+                        "Savasci olmasini",
+                        "Guvenilir olmasini",
+                        "Yolcu olmasini",
+                        "Hekim olmasini"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 8,
+                    "question": "Hz. Yusuf ile ilgili meşhur olaylardan biri hangisidir?",
+                    "options": [
+                        "Kizildeniz'i yarmasi",
+                        "Kuyuya birakilmasi",
+                        "Baligin karninda kalmasi",
+                        "Asayi ejderhaya cevirmesi"
+                    ],
+                    "correctAnswer": 1
+                }
+            ]
+        },
+        {
+            "id": "din-ibadet-ahlak",
+            "title": "Din: Ibadet ve Ahlak",
+            "description": "İbadet bilinci, güzel ahlak ve günlük dinî yaşam soruları.",
+            "difficulty": "medium",
+            "category": "Din",
+            "subcategory": "Ibadet ve Ahlak",
+            "thumbnail": "https://images.pexels.com/photos/7249305/pexels-photo-7249305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Namaz oncesinde genellikle hangi hazirlik yapilir?",
+                    "options": [
+                        "Abdest almak",
+                        "Sadaka vermek",
+                        "Sefere çıkmak",
+                        "Kurban kesmek"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Oruç ibadeti kişide hangi değeri geliştirir?",
+                    "options": [
+                        "Sadece hiz",
+                        "Sabir ve irade",
+                        "Gurur",
+                        "Asirilik"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 3,
+                    "question": "Fitre en çok hangi dönemde verilir?",
+                    "options": [
+                        "Ramazan sonunda",
+                        "Hac mevsimi dışında",
+                        "Yilbasi gecesi",
+                        "Yazin ortasinda"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 4,
+                    "question": "Hac ibadeti hicri takvimde genelde hangi ayda yapilir?",
+                    "options": [
+                        "Muharrem",
+                        "Recep",
+                        "Zilhicce",
+                        "Safer"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 5,
+                    "question": "Kul hakki kavrami neyi ifade eder?",
+                    "options": [
+                        "Sadece ticareti",
+                        "Baska insanlarin haklarini gozetmeyi",
+                        "Sadece yolculugu",
+                        "Sadece ezberi"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Selamlasmak toplumsal olarak neyi guclendirir?",
+                    "options": [
+                        "Uzakligi",
+                        "Kardeslik ve sevgi",
+                        "Rekabeti",
+                        "Kargasayi"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 7,
+                    "question": "Emanete sadık olmak hangi ahlaki değerle ilgilidir?",
+                    "options": [
+                        "Guvenilirlik",
+                        "Bencillik",
+                        "Kibir",
+                        "Israf"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 8,
+                    "question": "Dinde israftan kaçınmak hangi davranışa örnektir?",
+                    "options": [
+                        "Olculu olmak",
+                        "Aşırı harcama",
+                        "Ihmalkarlik",
+                        "Ozensizlik"
+                    ],
+                    "correctAnswer": 0
+                }
+            ]
+        },
+        {
+            "id": "teknoloji-yapay-zeka",
+            "title": "Teknoloji: Yapay Zeka",
+            "description": "Yapay zeka kavramları, modeller ve gerçek dünya kullanımları.",
+            "difficulty": "medium",
+            "category": "Teknoloji",
+            "subcategory": "Yapay Zeka",
+            "thumbnail": "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "İnsana benzer metin üreten modeller genel olarak ne diye adlandırılır?",
+                    "options": [
+                        "Büyük dil modeli",
+                        "Resim kodegi",
+                        "Alan adı sunucusu",
+                        "Paket yönlendirici"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Denetimli ogrenmede modele hangi tur veri verilir?",
+                    "options": [
+                        "Etiketli veri",
+                        "Sadece ses kaydi",
+                        "Sadece video",
+                        "Sadece rastgele sayi"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 3,
+                    "question": "Aşırı öğrenme durumunda model hangi sorunu yaşar?",
+                    "options": [
+                        "Veri boyutu artar",
+                        "Ag baglantisi kopar",
+                        "Egitim verisine bagimli kalip genelleyemez",
+                        "GPU hizi sabitlenir"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "TensorFlow hangi alanda sık kullanılır?",
+                    "options": [
+                        "Metin editoru yazmak",
+                        "Makine ogrenmesi uygulamalari",
+                        "Sunucu loglarini silmek",
+                        "Ofis dosyasi acmak"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Öneri sistemleri en çok hangi ürünlerde görülür?",
+                    "options": [
+                        "Yalnizca masaustu saatlerde",
+                        "Mikrodalga firinlarda",
+                        "E ticaret ve video platformlarinda",
+                        "Baski makinelerinde"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 6,
+                    "question": "GPU kullanımı yapay zeka eğitiminde neden önemlidir?",
+                    "options": [
+                        "Daha çok yazım denetimi yaptığı için",
+                        "Paralel işlem ile hesaplamayı hızlandırdığı için",
+                        "Veritabanı yedeği aldığı için",
+                        "Sunucu etiketlerini düzelttiği için"
+                    ],
+                    "correctAnswer": 1
+                }
+            ]
+        },
+        {
+            "id": "teknoloji-siber-guvenlik",
+            "title": "Teknoloji: Siber Guvenlik",
+            "description": "Şifreleme, kimlik doğrulama ve temel güvenlik pratikleri.",
+            "difficulty": "hard",
+            "category": "Teknoloji",
+            "subcategory": "Siber Guvenlik",
+            "thumbnail": "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Phishing saldirisi genellikle neyi hedefler?",
+                    "options": [
+                        "Ekran parlakligini",
+                        "Dosya boyutunu",
+                        "Kullanici bilgilerini ele gecirmeyi",
+                        "Klavyeyi degistirmeyi"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 2,
+                    "question": "İki adımlı doğrulama ne sağlar?",
+                    "options": [
+                        "Ek bir doğrulama katmanı",
+                        "Daha düşük ekran çözünürlüğü",
+                        "Sadece uzun şifre",
+                        "Tarayici eklentisi kaldirma"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 3,
+                    "question": "HTTPS hangi teknoloji ile guvenli baglanti kurar?",
+                    "options": [
+                        "FTP",
+                        "SMTP",
+                        "POP3",
+                        "TLS"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 4,
+                    "question": "Ransomware saldirisinda tipik olarak ne olur?",
+                    "options": [
+                        "Tarayici otomatik kapanir",
+                        "Klavye dili degisir",
+                        "Dosyalar şifrelenir ve fidye istenir",
+                        "Sadece saat ayari bozulur"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 5,
+                    "question": "Güçlü şifre için en iyi yaklaşım hangisidir?",
+                    "options": [
+                        "Sadece dogum tarihi",
+                        "Büyük küçük harf, rakam ve sembol karışımı",
+                        "Sadece tek harf tekrari",
+                        "Tüm hesaplarda aynı şifre"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "En az yetki prensibi neyi savunur?",
+                    "options": [
+                        "Tüm kullanıcılara yönetici yetkisi",
+                        "Sadece gerekli en dusuk yetkiyi vermek",
+                        "Yetkileri rastgele dagitmak",
+                        "Tüm servisleri dışarıya açmak"
+                    ],
+                    "correctAnswer": 1
+                }
+            ]
+        },
+        {
+            "id": "bilim-uzay-astronomi",
+            "title": "Bilim: Uzay ve Astronomi",
+            "description": "Gezegenler, galaksiler ve uzay keşifleri hakkında sorular.",
+            "difficulty": "medium",
+            "category": "Bilim",
+            "subcategory": "Astronomi",
+            "thumbnail": "https://images.pexels.com/photos/2034892/pexels-photo-2034892.jpeg",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Dünya'ya en yakın yıldız hangisidir?",
+                    "options": [
+                        "Gunes",
+                        "Sirius",
+                        "Vega",
+                        "Polaris"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Samanyolu hangi tur galaksi olarak bilinir?",
+                    "options": [
+                        "Eliptik",
+                        "Duzensiz",
+                        "Sarmal",
+                        "Halka"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Kizil Gezegen olarak anilan gezegen hangisidir?",
+                    "options": [
+                        "Jupiter",
+                        "Mars",
+                        "Neptun",
+                        "Merkur"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "Atmosfer dışında gözlem yapan meşhur teleskop hangisidir?",
+                    "options": [
+                        "Hubble",
+                        "Kepler",
+                        "Arecibo",
+                        "ALMA"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 5,
+                    "question": "Dünya'nın Güneş etrafında bir tam turu yaklaşık kaç gün sürer?",
+                    "options": [
+                        "120",
+                        "200",
+                        "300",
+                        "365"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 6,
+                    "question": "Halka sistemiyle en çok bilinen gezegen hangisidir?",
+                    "options": [
+                        "Venus",
+                        "Mars",
+                        "Saturn",
+                        "Uranus"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "bilim-fizik-kimya",
+            "title": "Bilim: Fizik ve Kimya",
+            "description": "Temel fizik büyüklükleri ve kimya kavramlarıyla hızını ölç.",
+            "difficulty": "hard",
+            "category": "Bilim",
+            "subcategory": "Fizik ve Kimya",
+            "thumbnail": "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Kuvvetin SI birimi hangisidir?",
+                    "options": [
+                        "Joule",
+                        "Newton",
+                        "Watt",
+                        "Pascal"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Saf suyun pH değeri yaklaşık kaç olur?",
+                    "options": [
+                        "1",
+                        "4",
+                        "7",
+                        "10"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Atomun çekirdeğinde hangi parçacıklar bulunur?",
+                    "options": [
+                        "Proton ve nötron",
+                        "Sadece elektron",
+                        "Sadece proton",
+                        "Foton ve gluon"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 4,
+                    "question": "Isı veren kimyasal tepkimeler hangi isimle anılır?",
+                    "options": [
+                        "Endotermik",
+                        "Ekzotermik",
+                        "Nükleer",
+                        "Katalitik"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Vakumda ışığın hızı yaklaşık kaç km/s değerindedir?",
+                    "options": [
+                        "30.000",
+                        "150.000",
+                        "220.000",
+                        "300.000"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 6,
+                    "question": "Periyodik tabloda O sembolu hangi elementi gosterir?",
+                    "options": [
+                        "Altin",
+                        "Azot",
+                        "Oksijen",
+                        "Argon"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "tarih-osmanli",
+            "title": "Tarih: Osmanli",
+            "description": "Kuruluş döneminden klasik döneme Osmanlı tarih soruları.",
+            "difficulty": "medium",
+            "category": "Tarih",
+            "subcategory": "Osmanli Tarihi",
+            "thumbnail": "https://images.pexels.com/photos/356966/pexels-photo-356966.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Osmanlı Devleti'nin kurucusu kimdir?",
+                    "options": [
+                        "Osman Gazi",
+                        "Orhan Gazi",
+                        "Yildirim Bayezid",
+                        "Fatih Sultan Mehmet"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "İstanbul hangi yıl fethedilmiştir?",
+                    "options": [
+                        "1402",
+                        "1439",
+                        "1492",
+                        "1453"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 3,
+                    "question": "Kanuni unvanıyla bilinen padişah kimdir?",
+                    "options": [
+                        "II. Mahmud",
+                        "IV. Murad",
+                        "Suleyman",
+                        "I. Ahmed"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "İstanbul'dan önce başkent olarak kullanılan şehir hangisidir?",
+                    "options": [
+                        "Bursa",
+                        "Edirne",
+                        "Konya",
+                        "Iznik"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 5,
+                    "question": "Yeniçeri ocağı için kullanılan insan kaynağı sistemi hangisidir?",
+                    "options": [
+                        "Devsirme",
+                        "Timar",
+                        "Iltizam",
+                        "Lonca"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 6,
+                    "question": "Lale Devri en çok hangi padişah dönemiyle ilişkilendirilir?",
+                    "options": [
+                        "II. Selim",
+                        "III. Murad",
+                        "III. Ahmed",
+                        "II. Abdulhamid"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "tarih-cagdas-dunya",
+            "title": "Tarih: Çağdaş Dünya",
+            "description": "20. yüzyıl ve modern dünya tarihindeki temel dönüm noktaları.",
+            "difficulty": "medium",
+            "category": "Tarih",
+            "subcategory": "Cagdas Tarih",
+            "thumbnail": "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Birinci Dünya Savaşı hangi yıl sona ermiştir?",
+                    "options": [
+                        "1916",
+                        "1918",
+                        "1920",
+                        "1923"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Berlin Duvarı hangi yıl yıkılmıştır?",
+                    "options": [
+                        "1979",
+                        "1984",
+                        "1989",
+                        "1995"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Birleşmiş Milletler hangi yıl kurulmuştur?",
+                    "options": [
+                        "1945",
+                        "1950",
+                        "1939",
+                        "1963"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 4,
+                    "question": "Uzaya cikan ilk insan kimdir?",
+                    "options": [
+                        "Neil Armstrong",
+                        "Buzz Aldrin",
+                        "John Glenn",
+                        "Yuri Gagarin"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 5,
+                    "question": "İnternetin günlük yaşama yaygın girmesi en çok hangi dönemde hızlandı?",
+                    "options": [
+                        "1960'lar",
+                        "1990'lar",
+                        "1930'lar",
+                        "1910'lar"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Euro banknot ve madeni para olarak ne zaman dolasima girdi?",
+                    "options": [
+                        "1995",
+                        "1999",
+                        "2002",
+                        "2008"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "sanat-sinema-klasikler",
+            "title": "Sanat ve Sinema: Klasikler",
+            "description": "Sinema tarihinin bilinen yapımları ve temel kavramları.",
+            "difficulty": "medium",
+            "category": "Sanat ve Sinema",
+            "subcategory": "Sinema Klasikleri",
+            "thumbnail": "https://images.pexels.com/photos/7991317/pexels-photo-7991317.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Inception filminin yonetmeni kimdir?",
+                    "options": [
+                        "Denis Villeneuve",
+                        "Christopher Nolan",
+                        "David Fincher",
+                        "James Cameron"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Titanic filmi kaç Oscar ödülü kazanmıştır?",
+                    "options": [
+                        "7",
+                        "9",
+                        "11",
+                        "13"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Melon sapka ve bastonuyla taninan sessiz sinema yildizi kimdir?",
+                    "options": [
+                        "Charlie Chaplin",
+                        "Buster Keaton",
+                        "Harold Lloyd",
+                        "Laurel"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 4,
+                    "question": "Studio Ghibli hangi ülkede kurulmuştur?",
+                    "options": [
+                        "Italya",
+                        "Fransa",
+                        "Guney Kore",
+                        "Japonya"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 5,
+                    "question": "Filmlerde duyulan arka plan muziklerine genel olarak ne denir?",
+                    "options": [
+                        "Storyboard",
+                        "Soundtrack",
+                        "Monolog",
+                        "Kostum tasarimi"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 6,
+                    "question": "Kameranın konuyu yukarıdan çekmesi hangi açı tipidir?",
+                    "options": [
+                        "Alt açı",
+                        "Omuz ustu",
+                        "Kus bakisi",
+                        "Yakindan cekim"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "spor-olimpiyat",
+            "title": "Spor: Olimpiyatlar",
+            "description": "Olimpiyat tarihi ve temel spor bilgileriyle hızlı tekrar.",
+            "difficulty": "medium",
+            "category": "Spor",
+            "subcategory": "Olimpiyatlar",
+            "thumbnail": "https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Olimpiyat halkalarının sayısı kaçtır?",
+                    "options": [
+                        "5",
+                        "4",
+                        "6",
+                        "7"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Yaz Olimpiyatları kaç yılda bir düzenlenir?",
+                    "options": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Usain Bolt hangi branşta efsane olmuştur?",
+                    "options": [
+                        "Yuzme",
+                        "Sprint kosu",
+                        "Bisiklet",
+                        "Cimnastik"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "2016 Yaz Olimpiyatları hangi ülkede yapılmıştır?",
+                    "options": [
+                        "Japonya",
+                        "Kanada",
+                        "Ispanya",
+                        "Brezilya"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 5,
+                    "question": "Klasik olimpiyat madalya siralamasi hangisidir?",
+                    "options": [
+                        "Altin Gumus Bronz",
+                        "Bronz Gumus Altin",
+                        "Gumus Bronz Altin",
+                        "Altin Bronz Gumus"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 6,
+                    "question": "Modern pentatlonda asagidakilerden hangisi yer alir?",
+                    "options": [
+                        "Buz hokeyi",
+                        "Kayakla atlama",
+                        "Eskrim",
+                        "Ragbi"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        },
+        {
+            "id": "din-kuran-temel",
+            "title": "Din: Kuran Temel Bilgiler",
+            "description": "Kur'an ile ilgili temel kavramlar ve yaygın bilgiler.",
+            "difficulty": "easy",
+            "category": "Din",
+            "subcategory": "Kuran Bilgisi",
+            "thumbnail": "https://images.pexels.com/photos/7249310/pexels-photo-7249310.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Kur'an'ın ilk suresi hangisidir?",
+                    "options": [
+                        "Bakara",
+                        "Fâtiha",
+                        "Yasin",
+                        "İhlâs"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 2,
+                    "question": "Kur'an'ın indirilmeye başlandığı ay olarak hangi ay bilinir?",
+                    "options": [
+                        "Ramazan",
+                        "Muharrem",
+                        "Safer",
+                        "Recep"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 3,
+                    "question": "Kur'an'ın asıl dili hangisidir?",
+                    "options": [
+                        "Farsca",
+                        "Turkce",
+                        "Arapca",
+                        "Urduca"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 4,
+                    "question": "Kur'an kaç cüzden oluşur?",
+                    "options": [
+                        "20",
+                        "25",
+                        "28",
+                        "30"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 5,
+                    "question": "Kur'an okumaya başlarken yaygın olarak hangi ifade kullanılır?",
+                    "options": [
+                        "Euzu besmele",
+                        "Tekbir",
+                        "Tahmid",
+                        "Salavat"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 6,
+                    "question": "Âmin ifadesi genellikle ne anlamda kullanılır?",
+                    "options": [
+                        "Yolculuk daveti",
+                        "Duanin kabulunu dileme",
+                        "Sadece selamlasma",
+                        "Yemek duasini bitirme"
+                    ],
+                    "correctAnswer": 1
+                }
+            ]
+        },
+        {
+            "id": "resimli-quiz-logolar",
+            "title": "Resimli Quiz: Marka Logoları",
+            "description": "Marka ve platform logolarıyla ilgili hızlı bilgi testi.",
+            "difficulty": "easy",
+            "category": "Resimli Quiz",
+            "subcategory": "Marka Logoları",
+            "thumbnail": "https://images.pexels.com/photos/5053740/pexels-photo-5053740.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "timeLimit": 60,
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "Isırılmış elma logosu en çok hangi markayla özdeşleşir?",
+                    "options": [
+                        "Apple",
+                        "Dell",
+                        "Lenovo",
+                        "Acer"
+                    ],
+                    "correctAnswer": 0
+                },
+                {
+                    "id": 2,
+                    "question": "Kırmızı zemin üzerindeki oynat simgesi hangi platformu çağrıştırır?",
+                    "options": [
+                        "Vimeo",
+                        "Twitch",
+                        "YouTube",
+                        "Discord"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 3,
+                    "question": "Mavi zemin uzerindeki beyaz f harfi hangi sosyal agindir?",
+                    "options": [
+                        "LinkedIn",
+                        "Facebook",
+                        "Pinterest",
+                        "Reddit"
+                    ],
+                    "correctAnswer": 1
+                },
+                {
+                    "id": 4,
+                    "question": "Yeşil konuşma balonunda telefon simgesi hangi uygulamayı ifade eder?",
+                    "options": [
+                        "Signal",
+                        "Skype",
+                        "Zoom",
+                        "WhatsApp"
+                    ],
+                    "correctAnswer": 3
+                },
+                {
+                    "id": 5,
+                    "question": "Siyah zeminde kirmizi N harfiyle bilinen platform hangisidir?",
+                    "options": [
+                        "Prime Video",
+                        "Hulu",
+                        "Netflix",
+                        "HBO Max"
+                    ],
+                    "correctAnswer": 2
+                },
+                {
+                    "id": 6,
+                    "question": "Spotify logosunun ana vurgu rengi hangisidir?",
+                    "options": [
+                        "Mavi",
+                        "Mor",
+                        "Yeşil",
+                        "Turuncu"
+                    ],
+                    "correctAnswer": 2
+                }
+            ]
+        }
+    ],
+    "passingScore": 70
+}

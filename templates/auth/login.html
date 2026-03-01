@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Giriş Yap - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block body_class %}auth-page theme-light{% endblock %}
+
+{% block content %}
+<main class="auth">
+    <div class="auth__shell">
+        <section class="auth__panel">
+            <div class="auth__top">
+                <a class="auth-back" href="{% url 'base:index' %}">
+                    <i class="ph ph-arrow-left"></i>
+                    Ana Sayfaya Dön
+                </a>
+                <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                    <i class="ph ph-moon"></i>
+                    <span data-theme-label>KOYU</span>
+                </button>
+            </div>
+            <span class="auth__eyebrow">
+                <i class="ph ph-brain"></i>
+                QuizFlow Erişimi
+            </span>
+            <h1 class="auth__title">Tekrar Hoş Geldin</h1>
+            <p class="auth__desc">
+                Quizlerine kaldığın yerden devam et, önceki cevaplarını incele ve ilerlemeni sürdür.
+            </p>
+            <div class="auth__metrics">
+                <article class="auth-metric">
+                    <p class="auth-metric__label">Tamamlanan Quiz</p>
+                    <p class="auth-metric__value">120+</p>
+                </article>
+                <article class="auth-metric">
+                    <p class="auth-metric__label">Ortalama Skor</p>
+                    <p class="auth-metric__value">87%</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="auth__panel">
+            <h2 class="auth__heading">Giriş Yap</h2>
+            <p class="auth__subheading">Hesabınla giriş yap ve oyuna başla.</p>
+
+            <form class="auth-form" action="{% url 'base:quizzes' %}">
+                <label class="form-label" for="email">E-posta</label>
+                <div class="form-field--icon">
+                    <i class="ph ph-envelope-simple"></i>
+                    <input id="email" name="email" class="form-control" type="email" required
+                        placeholder="ornek@mail.com">
+                </div>
+
+                <label class="form-label" for="password">Şifre</label>
+                <div class="form-field--icon">
+                    <i class="ph ph-lock"></i>
+                    <input id="password" name="password" class="form-control" type="password" required
+                        placeholder="Şifreni gir">
+                    <button type="button" id="togglePassword" class="form-field__action"
+                        aria-label="Şifre görünürlüğünü değiştir">
+                        <i class="ph ph-eye"></i>
+                    </button>
+                </div>
+
+                <div class="auth-form__meta">
+                    <label class="auth-form__check">
+                        <input type="checkbox">
+                        Beni hatırla
+                    </label>
+                    <a href="{% url 'authentication:forgot_password' %}" class="auth-link">Şifremi unuttum</a>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block">
+                    Giriş Yap
+                    <i class="ph ph-sign-in"></i>
+                </button>
+            </form>
+
+            <p class="auth__footer">
+                QuizFlow'a yeni misin?
+                <a href="{% url 'authentication:register' %}" class="auth-link">Hesap oluştur</a>
+            </p>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Hesabına gir, kaldığın yerden devam et.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const toggleButton = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    toggleButton.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        toggleButton.innerHTML = isPassword ? '<i class="ph ph-eye-slash"></i>' : '<i class="ph ph-eye"></i>';
+    });
+
+    document.querySelector('.auth-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) return;
+
+        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
+
+        if (userData.email && userData.email === email && userData.password && userData.password !== password) {
+            alert('Şifre yanlış. Lütfen tekrar deneyin.');
+            return;
+        }
+
+        if (!userData.email) {
+            userData.email = email;
+        }
+        if (!userData.password) {
+            userData.password = password;
+        }
+        localStorage.setItem('quizflow-user', JSON.stringify(userData));
+        localStorage.setItem('quizflow-logged-in', 'true');
+        window.location.href = '{% url "base:quizzes" %}';
+    });
+</script>
+{% endblock %}

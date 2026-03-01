@@ -1,0 +1,24 @@
+{
+  "faqs": [
+    {
+      "question": "QuizFlow tam olarak ne sunuyor?",
+      "answer": "Tek oyunculu quiz, iki oyunculu yarış ve sonuç analizi ekranlarıyla bilgi seviyeni ölçmeni sağlayan tarayıcı tabanlı bir deneyim sunar."
+    },
+    {
+      "question": "Skorlar nasıl hesaplanır?",
+      "answer": "Doğru cevap sayısının toplam soru sayısına oranına göre yüzde skor hesaplanır."
+    },
+    {
+      "question": "Süre dolarsa ne olur?",
+      "answer": "Süre bittiğinde quiz mevcut cevaplara göre otomatik tamamlanır ve sonuç ekranı açılır."
+    },
+    {
+      "question": "Hesap açmadan quiz çözebilir miyim?",
+      "answer": "Evet, temel quiz akışlarını kullanabilirsin. Hesap açmak ilerleme takibi için avantaj sağlar."
+    },
+    {
+      "question": "Yanlış cevapları sonradan görebilir miyim?",
+      "answer": "Evet, quiz bitiminde cevap analizi ekranından doğru ve yanlışlarını detaylı görebilirsin."
+    }
+  ]
+}

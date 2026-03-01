@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}2 Oyunculu Quiz - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" onclick="confirmMultiplayerQuit()">
+                <i class="ph ph-sign-out"></i>
+                Çık
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="multiplayer">
+    <div class="multiplayer__container">
+        <section class="multiplayer-setup" id="multiplayerSetup">
+            <h2 class="multiplayer__title">2 Oyunculu Quiz Modu</h2>
+            <p class="multiplayer__subtitle">Quiz seç, oyuncuları gir ve maçı başlat.</p>
+
+            <form id="multiplayerSetupForm" class="multiplayer-form">
+                <label class="multiplayer-form__label" for="multiplayerQuizSelect">Quiz</label>
+                <select id="multiplayerQuizSelect" class="multiplayer-form__control" required>
+                    <option value="" selected disabled>Quiz seçin</option>
+                </select>
+
+                <label class="multiplayer-form__label" for="playerOneName">Oyuncu 1</label>
+                <input id="playerOneName" class="multiplayer-form__control" type="text" maxlength="20"
+                    placeholder="Oyuncu 1 adını girin" required>
+
+                <label class="multiplayer-form__label" for="playerTwoName">Oyuncu 2</label>
+                <input id="playerTwoName" class="multiplayer-form__control" type="text" maxlength="20"
+                    placeholder="Oyuncu 2 adını girin" required>
+
+                <button class="btn btn--primary" type="submit">
+                    Maçı Başlat
+                    <i class="ph ph-caret-right"></i>
+                </button>
+            </form>
+        </section>
+
+        <section class="multiplayer-game" id="multiplayerGame" hidden>
+            <div class="quiz-play__header">
+                <div class="quiz-info">
+                    <h2 class="quiz-info__title" id="multiplayerQuizTitle"></h2>
+                    <div class="quiz-info__meta">
+                        <span class="quiz-info__progress" id="multiplayerProgressText">Soru 1 / 10</span>
+                    </div>
+                </div>
+
+                <div class="timer" id="multiplayerTimer">
+                    <svg class="timer__circle" viewBox="0 0 100 100">
+                        <circle class="timer__background" cx="50" cy="50" r="45"></circle>
+                        <circle class="timer__progress" id="multiplayerTimerProgress" cx="50" cy="50" r="45">
+                        </circle>
+                    </svg>
+                    <div class="timer__text" id="multiplayerTimerText">60</div>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-bar__fill" id="multiplayerProgressBar"></div>
+            </div>
+
+            <div class="multiplayer-scoreboard">
+                <div class="multiplayer-scoreboard__item">
+                    <span class="multiplayer-scoreboard__name" id="playerOneLabel">Oyuncu 1</span>
+                    <span class="multiplayer-scoreboard__score" id="playerOneScore">0</span>
+                </div>
+                <div class="multiplayer-scoreboard__item">
+                    <span class="multiplayer-scoreboard__name" id="playerTwoLabel">Oyuncu 2</span>
+                    <span class="multiplayer-scoreboard__score" id="playerTwoScore">0</span>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <h3 class="question-card__text" id="multiplayerQuestionText"></h3>
+
+                <figure class="question-media" id="multiplayerQuestionMedia" hidden>
+                    <img class="question-media__image" id="multiplayerQuestionImage" alt="Soru görseli"
+                        loading="lazy">
+                    <figcaption class="question-media__caption" id="multiplayerQuestionImageCaption" hidden>
+                    </figcaption>
+                </figure>
+
+                <p class="multiplayer-turn" id="multiplayerTurnInfo"></p>
+
+                <div class="multiplayer-options multiplayer-options--single">
+                    <h4 class="multiplayer-options__title" id="multiplayerActivePlayerTitle">Cevap Sırası</h4>
+                    <div class="options" id="multiplayerActivePlayerOptions"></div>
+                </div>
+            </div>
+
+            <div class="quiz-play__actions">
+                <button class="btn btn--primary" id="multiplayerNextButton" onclick="nextMultiplayerQuestion()"
+                    disabled>
+                    Sonraki Soru
+                    <i class="ph ph-caret-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="multiplayer-result" id="multiplayerResult" hidden>
+            <div class="result-card">
+                <div class="result-card__icon pass">
+                    <i class="ph ph-trophy"></i>
+                </div>
+                <h2 class="result-card__title" id="multiplayerWinnerTitle">Kazanan</h2>
+                <p class="multiplayer-result__subtitle" id="multiplayerResultSubtitle"></p>
+
+                <div class="multiplayer-result__scores">
+                    <div class="multiplayer-result__score-item">
+                        <span id="multiplayerPlayerOneResultName">Oyuncu 1</span>
+                        <strong id="multiplayerPlayerOneResultScore">0/10</strong>
+                    </div>
+                    <div class="multiplayer-result__score-item">
+                        <span id="multiplayerPlayerTwoResultName">Oyuncu 2</span>
+                        <strong id="multiplayerPlayerTwoResultScore">0/10</strong>
+                    </div>
+                </div>
+
+                <div class="result-card__actions">
+                    <button class="btn btn--primary" onclick="restartMultiplayer()">
+                        <i class="ph ph-arrow-clockwise"></i>
+                        Tekrar Oyna
+                    </button>
+                    <button class="btn btn--secondary" onclick="backToQuizSelection()">
+                        <i class="ph ph-house"></i>
+                        Quizlere Dön
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}2 oyunculu modda hızlı rekabet ve adil skor takibi bir arada.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}

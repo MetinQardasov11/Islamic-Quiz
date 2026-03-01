@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" data-testid="quit-button" onclick="confirmQuit()">
+                <i class="ph ph-sign-out"></i>
+                Çık
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="quiz-play">
+    <div class="quiz-play__container">
+        <div class="quiz-play__header">
+            <div class="quiz-info">
+                <h2 class="quiz-info__title" id="quizTitle" data-testid="quiz-title"></h2>
+                <div class="quiz-info__meta">
+                    <span class="quiz-info__progress" id="progressText" data-testid="progress-text">Soru 1 / 10</span>
+                </div>
+            </div>
+
+            <div class="timer" id="timer" data-testid="timer">
+                <svg class="timer__circle" viewBox="0 0 100 100">
+                    <circle class="timer__background" cx="50" cy="50" r="45"></circle>
+                    <circle class="timer__progress" id="timerProgress" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="timer__text" id="timerText" data-testid="timer-text">60</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-bar__fill" id="progressBar" data-testid="progress-bar"></div>
+        </div>
+
+        <div class="question-card" id="questionCard" data-testid="question-card">
+            <h3 class="question-card__text" id="questionText" data-testid="question-text"></h3>
+
+            <figure class="question-media" id="questionMedia" hidden>
+                <img class="question-media__image" id="questionImage" alt="Soru görseli" loading="lazy">
+                <figcaption class="question-media__caption" id="questionImageCaption" hidden></figcaption>
+            </figure>
+
+            <div class="options" id="optionsContainer" data-testid="options-container">
+                <!-- Seçenekler burada listelenecek -->
+            </div>
+        </div>
+
+        <div class="quiz-play__actions">
+            <button class="btn btn--primary" id="nextButton" data-testid="next-button" onclick="nextQuestion()"
+                disabled>
+                Sonraki Soru
+                <i class="ph ph-caret-right"></i>
+            </button>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Sorular bitince analiz ekranıyla performansını inceleyebilirsin.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}

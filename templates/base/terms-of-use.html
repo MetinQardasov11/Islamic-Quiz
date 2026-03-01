@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Kullanım Şartları - QuizFlow{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:index' %}'">
+                <i class="ph ph-house"></i>
+                Ana Sayfa
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="landing">
+    <section class="info-block">
+        <h1 class="info-block__title">Kullanım Şartları</h1>
+        <p class="info-block__subtitle">
+            QuizFlow'u kullanırken adil, güvenli ve saygılı bir deneyim için aşağıdaki maddeler geçerlidir.
+        </p>
+
+        <div id="termsList" class="terms-list">
+            <article class="terms-item">
+                <h4>1. Adil Kullanım</h4>
+                <p>Hile amaçlı eklentiler, otomasyonlar ve diğer kullanıcıların deneyimini bozan davranışlar yasaktır.</p>
+            </article>
+            <article class="terms-item">
+                <h4>2. İçerik Sorumluluğu</h4>
+                <p>Quiz içerikleri eğitsel amaçla sunulur. Hata veya eksikler için düzenli güncelleme yapılabilir.</p>
+            </article>
+            <article class="terms-item">
+                <h4>3. Sonuç ve Değerlendirme</h4>
+                <p>Skorlar bilgilendirme amaçlıdır; resmi sertifika ya da akademik belge yerine geçmez.</p>
+            </article>
+            <article class="terms-item">
+                <h4>4. Hizmet Güncellemeleri</h4>
+                <p>Arayüz, soru setleri ve puanlama kuralları hizmet kalitesi için bildirimsiz güncellenebilir.</p>
+            </article>
+            <article class="terms-item">
+                <h4>5. Hesap ve Güvenlik</h4>
+                <p>Hesap bilgilerini güvenli tutmak kullanıcının sorumluluğundadır. Şüpheli durumlarda şifreni yenile.</p>
+            </article>
+        </div>
+
+        <p id="termsNote" class="terms-note">
+            QuizFlow'u kullanarak bu kuralları kabul etmiş sayılırsın. Detaylı bilgi için
+            <a class="auth-link" href="{% url 'base:faq' %}">SSS sayfasına</a> da göz atabilirsin.
+        </p>
+    </section>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Güvenli ve adil bir quiz deneyimi için bu kurallar tüm kullanıcılar için geçerlidir.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+{% endblock %}

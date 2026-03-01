@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz Sonucu - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" data-testid="home-button-result-header" onclick="goHome()">
+                <i class="ph ph-house"></i>
+                Ana Sayfa
+            </button>
+            <button class="btn btn--secondary header__auth-btn header__profile-btn" onclick="window.location.href='{% url 'authentication:profile' %}'" style="display:none">
+                <i class="ph ph-user-circle"></i>
+                Profilim
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="result">
+    <div class="result__container">
+        <div class="result-card">
+            <div class="result-card__icon" id="resultIcon" data-testid="result-icon">
+                <i class="ph ph-trophy"></i>
+            </div>
+
+            <h2 class="result-card__title" id="resultTitle" data-testid="result-title">Quiz Tamamlandı!</h2>
+
+            <div class="result-card__score">
+                <div class="score-circle" id="scoreCircle" data-testid="score-circle">
+                    <span class="score-circle__value" id="scorePercentage" data-testid="score-percentage">0%</span>
+                </div>
+            </div>
+
+            <div class="result-card__details">
+                <div class="result-stat">
+                    <span class="result-stat__label">Doğru Sayısı</span>
+                    <span class="result-stat__value" id="correctCount" data-testid="correct-count">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-stat__label">Toplam Soru</span>
+                    <span class="result-stat__value" id="totalCount" data-testid="total-count">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-stat__label">Durum</span>
+                    <span class="result-stat__value result-stat__value--status" id="passStatus"
+                        data-testid="pass-status">-</span>
+                </div>
+            </div>
+
+            <div class="result-card__actions">
+                <button class="btn btn--primary" data-testid="review-button" onclick="reviewAnswers()">
+                    <i class="ph ph-list-checks"></i>
+                    Cevapları İncele
+                </button>
+                <button class="btn btn--secondary" data-testid="play-again-button" onclick="playAgain()">
+                    <i class="ph ph-arrow-clockwise"></i>
+                    Tekrar Oyna
+                </button>
+                <button class="btn btn--secondary" data-testid="home-button-result" onclick="goHome()">
+                    <i class="ph ph-house"></i>
+                    Ana Sayfaya Dön
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Sonucun hazır. Şimdi analiz ekranından eksiklerini tamamla.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}

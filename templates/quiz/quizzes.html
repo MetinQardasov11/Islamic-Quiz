@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz Seç - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button class="btn btn--secondary" data-testid="home-button" onclick="window.location.href='{% url 'base:index' %}'">
+                <i class="ph ph-house"></i>
+                Ana Sayfa
+            </button>
+            <button class="btn btn--secondary header__auth-btn header__profile-btn" onclick="window.location.href='{% url 'authentication:profile' %}'" style="display:none">
+                <i class="ph ph-user-circle"></i>
+                Profilim
+            </button>
+            <button class="btn btn--secondary header__auth-btn header__login-btn" onclick="window.location.href='{% url 'authentication:login' %}'" style="display:none">
+                <i class="ph ph-sign-in"></i>
+                Giriş Yap
+            </button>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="quizzes">
+    <div class="quizzes__container">
+        <h2 class="quizzes__title" data-testid="quizzes-title">Quizini Seç</h2>
+        <p class="quizzes__subtitle">Bir kategori seç, süreye karşı yarış ve skorunu yükselt.</p>
+
+        <div class="quizzes__category-strip">
+            <p class="quizzes__category-label">Mevcut Kategoriler</p>
+            <div class="quizzes__categories" id="categoryList" data-testid="category-list"></div>
+        </div>
+
+        <section class="quizzes__filters" aria-label="Quiz filtreleri">
+            <label class="quizzes__filter quizzes__filter--search" for="quizSearchInput">
+                <span class="quizzes__filter-label">Ara</span>
+                <div class="quizzes__search">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="quizSearchInput"
+                        class="quizzes__filter-control quizzes__search-input"
+                        placeholder="Quiz adı, açıklama veya kategori ara">
+                </div>
+            </label>
+
+            <label class="quizzes__filter quizzes__filter--category quizzes__filter--select" for="categoryFilterSelect">
+                <span class="quizzes__filter-label">Kategori</span>
+                <select id="categoryFilterSelect" class="quizzes__filter-control" data-testid="category-filter-select">
+                    <option value="all">Tüm kategoriler</option>
+                </select>
+            </label>
+
+            <label class="quizzes__filter quizzes__filter--difficulty quizzes__filter--select" for="difficultyFilterSelect">
+                <span class="quizzes__filter-label">Zorluk</span>
+                <select id="difficultyFilterSelect" class="quizzes__filter-control" data-testid="difficulty-filter-select">
+                    <option value="all">Tüm zorluklar</option>
+                    <option value="easy">Kolay</option>
+                    <option value="medium">Orta</option>
+                    <option value="hard">Zor</option>
+                </select>
+            </label>
+
+            <label class="quizzes__filter quizzes__filter--subcategory quizzes__filter--select" id="subcategoryFilterField"
+                for="subcategoryFilterSelect">
+                <span class="quizzes__filter-label">Alt kategori</span>
+                <select id="subcategoryFilterSelect" class="quizzes__filter-control" data-testid="subcategory-filter-select">
+                    <option value="all">Tüm alt kategoriler</option>
+                </select>
+            </label>
+
+            <button type="button" class="btn btn--secondary quizzes__clear" id="clearFiltersButton">
+                <i class="ph ph-funnel-simple-x"></i>
+                Filtreleri Temizle
+            </button>
+        </section>
+
+        <p class="quizzes__result-count" id="quizResultCount" data-testid="quiz-result-count"></p>
+
+        <div class="quizzes__mode-switch">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:multiplayer' %}'">
+                <i class="ph ph-users-three"></i>
+                2 Oyunculu Mod
+            </button>
+        </div>
+
+        <div class="quiz-grid" id="quizGrid" data-testid="quiz-grid">
+        </div>
+
+        <nav class="quizzes__pagination" id="quizPagination" aria-label="Quiz sayfalama" hidden></nav>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Filtrele, seç ve hemen quiz macerasına başla.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+{% endblock %}

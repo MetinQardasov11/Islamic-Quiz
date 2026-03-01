@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}QuizFlow - Bilgini Yeni Nesil Deneyimde Test Et{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__container">
+        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <div class="header__actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
+                <i class="ph ph-moon"></i>
+                <span data-theme-label>KOYU</span>
+            </button>
+            <button class="btn btn--secondary header__auth-btn header__login-btn" onclick="window.location.href='{% url 'authentication:login' %}'">
+                <i class="ph ph-sign-in"></i>
+                Giriş Yap
+            </button>
+            <button class="btn btn--primary header__auth-btn header__register-btn" onclick="window.location.href='{% url 'authentication:register' %}'">
+                <i class="ph ph-user-plus"></i>
+                Kayıt Ol
+            </button>
+            <button class="btn btn--primary header__auth-btn header__profile-btn" onclick="window.location.href='{% url 'authentication:profile' %}'" style="display:none">
+                <i class="ph ph-user-circle"></i>
+                Profilim
+            </button>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="landing">
+    <section class="landing__hero">
+        <div class="landing__content">
+            <h1 class="landing__title" data-testid="landing-title">
+                Bilgini sadece ölçme, <strong>hikâyeye dönüştür</strong>
+            </h1>
+            <p class="landing__description" data-testid="landing-description">
+                QuizFlow; teknoloji, bilim, tarih ve genel kültür alanlarında hızlı, akıcı ve modern bir quiz
+                deneyimi sunar. Tek oyunculu modda skorunu geliştir, iki oyunculu modda anlık rekabete gir.
+            </p>
+
+            <div class="landing__quick-links">
+                <a class="quick-link" href="{% url 'base:faq' %}">
+                    <i class="ph ph-question"></i>
+                    SSS
+                </a>
+                <a class="quick-link" href="{% url 'base:terms_of_use' %}">
+                    <i class="ph ph-scroll"></i>
+                    Kullanım Şartları
+                </a>
+                <a class="quick-link" href="{% url 'base:quizzes' %}">
+                    <i class="ph ph-grid-four"></i>
+                    Kategoriler
+                </a>
+            </div>
+
+            <div class="landing__cta">
+                <button class="btn btn--primary" data-testid="start-quiz-button"
+                    onclick="window.location.href='{% url 'base:quizzes' %}'">
+                    <i class="ph ph-rocket-launch"></i>
+                    Quiz'e Başla
+                </button>
+                <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:multiplayer' %}'">
+                    <i class="ph ph-users-three"></i>
+                    2 Oyunculu Mod
+                </button>
+            </div>
+        </div>
+
+        <section class="landing__info" aria-label="Platform bilgileri">
+            <article class="landing-info-card">
+                <h3 class="landing-info-card__title">Çok Katmanlı Kategoriler</h3>
+                <p class="landing-info-card__text">
+                    Tek bir alana sıkışmadan farklı zorluk ve konu dağılımıyla düzenli pratik yap.
+                </p>
+            </article>
+            <article class="landing-info-card">
+                <h3 class="landing-info-card__title">Görselli ve Hızlı Akış</h3>
+                <p class="landing-info-card__text">
+                    Görselli sorular ve net etkileşim akışıyla odağını kaybetmeden quizini tamamla.
+                </p>
+            </article>
+            <article class="landing-info-card">
+                <h3 class="landing-info-card__title">Anlık Sonuç Analizi</h3>
+                <p class="landing-info-card__text">
+                    Doğru-yanlış dağılımını, yüzde skorunu ve tekrar etmen gereken başlıkları hemen gör.
+                </p>
+            </article>
+        </section>
+
+        <div class="landing__stats">
+            <div class="stat-card">
+                <i class="ph ph-books stat-card__icon"></i>
+                <h3 class="stat-card__value">64+</h3>
+                <p class="stat-card__label">Soru Havuzu</p>
+            </div>
+            <div class="stat-card">
+                <i class="ph ph-stack stat-card__icon"></i>
+                <h3 class="stat-card__value">8</h3>
+                <p class="stat-card__label">Ana Kategori</p>
+            </div>
+            <div class="stat-card">
+                <i class="ph ph-gauge stat-card__icon"></i>
+                <h3 class="stat-card__value">Anlık</h3>
+                <p class="stat-card__label">İlerleme Takibi</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing__extras">
+        <article class="info-block">
+            <h2 class="info-block__title">Sıkça Sorulan Sorular</h2>
+            <p class="info-block__subtitle">
+                Platformu kullanmadan önce merak edilen konuları tek sayfada topladık.
+            </p>
+            <div id="landingFaqList" class="faq-grid">
+                <details class="faq-item" open>
+                    <summary>QuizFlow tam olarak ne sunuyor?</summary>
+                    <p>
+                        Tek oyunculu quiz, iki oyunculu yarış ve sonuç analizi ekranlarıyla bilgi seviyeni ölçmeni
+                        sağlayan tarayıcı tabanlı bir quiz deneyimi sunar.
+                    </p>
+                </details>
+                <details class="faq-item">
+                    <summary>Süre dolarsa ne olur?</summary>
+                    <p>
+                        Süre bitince quiz mevcut cevaplara göre otomatik tamamlanır ve sonuç ekranı oluşturulur.
+                    </p>
+                </details>
+            </div>
+            <a class="btn btn--secondary" href="{% url 'base:faq' %}">
+                <i class="ph ph-arrow-right"></i>
+                Tüm SSS'leri Gör
+            </a>
+        </article>
+
+        <article class="info-block">
+            <h2 class="info-block__title">Kullanım Şartları</h2>
+            <p class="info-block__subtitle">
+                Platformu adil ve güvenli kullanabilmek için temel maddeleri inceleyin.
+            </p>
+            <div id="landingTermsList" class="terms-list">
+                <article class="terms-item">
+                    <h4>1. Adil Kullanım</h4>
+                    <p>Otomatik komutlar ve deneyimi bozan davranışlar kabul edilmez.</p>
+                </article>
+                <article class="terms-item">
+                    <h4>2. İçerik Sorumluluğu</h4>
+                    <p>İçerikler eğitsel amaçla sunulur ve zamanla güncellenebilir.</p>
+                </article>
+            </div>
+            <a class="btn btn--secondary" href="{% url 'base:terms_of_use' %}">
+                <i class="ph ph-arrow-right"></i>
+                Tüm Şartları Oku
+            </a>
+        </article>
+    </section>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Bilgini güçlendiren modern quiz deneyimi.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+{% endblock %}

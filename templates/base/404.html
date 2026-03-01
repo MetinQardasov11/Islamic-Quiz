@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Sayfa Bulunamadı - QuizFlow{% endblock %}
+
+{% block extra_head %}
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="error-page">
+    <div class="error-page__container">
+        <div class="error-page__content">
+            <h1 class="error-page__code" data-testid="error-code">404</h1>
+            <h2 class="error-page__title" data-testid="error-title">Sayfa Bulunamadı</h2>
+            <p class="error-page__description" data-testid="error-description">
+                Aradığın sayfaya ulaşılamadı. Ana sayfaya dönerek quizlere devam edebilirsin.
+            </p>
+            <button class="btn btn--primary" data-testid="return-home-button"
+                onclick="window.location.href='{% url 'base:index' %}'">
+                <i class="ph ph-house"></i>
+                Ana Sayfaya Dön
+            </button>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_copy %}Aradığın sayfayı bulamadık, ana akışa dönüp devam edebilirsin.{% endblock %}
+
+{% block footer_links %}
+<a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
+<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
+<a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
+<a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
+{% endblock %}
