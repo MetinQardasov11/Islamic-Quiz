@@ -658,13 +658,13 @@ function getReviewQuestionMediaMarkup(question) {
 }
 
 function initAuthUI() {
-    const isLoggedIn = localStorage.getItem('quizflow-logged-in') === 'true';
+    const isLoggedIn = window.QUIZFLOW_IS_LOGGED_IN === true;
 
     document.querySelectorAll('.header__login-btn, .header__register-btn').forEach(btn => {
         btn.style.display = isLoggedIn ? 'none' : '';
     });
 
-    document.querySelectorAll('.header__profile-btn').forEach(btn => {
+    document.querySelectorAll('.header__profile-btn, .header__logout-btn').forEach(btn => {
         btn.style.display = isLoggedIn ? '' : 'none';
     });
 }

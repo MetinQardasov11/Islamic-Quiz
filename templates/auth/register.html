@@ -48,35 +48,43 @@
             <h2 class="auth__heading">Hesap Oluştur</h2>
             <p class="auth__subheading">Bir dakikadan kısa sürede QuizFlow yolculuğunu başlat.</p>
 
-            <form id="registerForm" class="auth-form" action="{% url 'base:quizzes' %}">
-                <label class="form-label" for="name">Ad Soyad</label>
+            <form class="auth-form" method="post" action="{% url 'authentication:register' %}">
+                {% csrf_token %}
+
+                <label class="form-label" for="{{ form.name.id_for_label }}">Ad Soyad</label>
                 <div class="form-field--icon">
                     <i class="ph ph-user"></i>
-                    <input id="name" name="name" class="form-control" type="text" required
-                        placeholder="Ahmet Yılmaz">
+                    {{ form.name }}
                 </div>
+                {% if form.name.errors %}
+                <p class="form-error">{{ form.name.errors.0 }}</p>
+                {% endif %}
 
-                <label class="form-label" for="email">E-posta</label>
+                <label class="form-label" for="{{ form.email.id_for_label }}">E-posta</label>
                 <div class="form-field--icon">
                     <i class="ph ph-envelope-simple"></i>
-                    <input id="email" name="email" class="form-control" type="email" required
-                        placeholder="ornek@mail.com">
+                    {{ form.email }}
                 </div>
+                {% if form.email.errors %}
+                <p class="form-error">{{ form.email.errors.0 }}</p>
+                {% endif %}
 
                 <div class="form-row">
                     <div>
-                        <label class="form-label" for="password">Şifre</label>
-                        <input id="password" name="password" class="form-control" type="password" required
-                            minlength="6" placeholder="En az 6 karakter">
+                        <label class="form-label" for="{{ form.password.id_for_label }}">Şifre</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                        <p class="form-error">{{ form.password.errors.0 }}</p>
+                        {% endif %}
                     </div>
                     <div>
-                        <label class="form-label" for="confirmPassword">Şifre Tekrar</label>
-                        <input id="confirmPassword" name="confirmPassword" class="form-control" type="password"
-                            required minlength="6" placeholder="Şifreyi tekrar gir">
+                        <label class="form-label" for="{{ form.confirm_password.id_for_label }}">Şifre Tekrar</label>
+                        {{ form.confirm_password }}
+                        {% if form.confirm_password.errors %}
+                        <p class="form-error">{{ form.confirm_password.errors.0 }}</p>
+                        {% endif %}
                     </div>
                 </div>
-
-                <p id="passwordError"></p>
 
                 <label class="auth-form__check">
                     <input type="checkbox" required>
@@ -106,40 +114,4 @@
 <a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
 <a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
 <a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-    const registerForm = document.getElementById('registerForm');
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const passwordError = document.getElementById('passwordError');
-
-    registerForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        passwordError.textContent = '';
-
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            passwordError.textContent = 'Şifreler eşleşmiyor.';
-            return;
-        }
-
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = passwordInput.value;
-
-        if (!name || !email || !password) return;
-
-        const userData = {
-            name: name,
-            email: email,
-            password: password,
-            joinDate: new Date().toISOString()
-        };
-
-        localStorage.setItem('quizflow-user', JSON.stringify(userData));
-        localStorage.setItem('quizflow-logged-in', 'true');
-        window.location.href = '{% url "base:quizzes" %}';
-    });
-</script>
 {% endblock %}

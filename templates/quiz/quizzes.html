@@ -23,6 +23,10 @@
                 <i class="ph ph-user-circle"></i>
                 Profilim
             </button>
+            <button class="btn btn--secondary header__auth-btn header__logout-btn" onclick="window.location.href='{% url 'authentication:logout' %}'" style="display:none">
+                <i class="ph ph-sign-out"></i>
+                Çıkış
+            </button>
             <button class="btn btn--secondary header__auth-btn header__login-btn" onclick="window.location.href='{% url 'authentication:login' %}'" style="display:none">
                 <i class="ph ph-sign-in"></i>
                 Giriş Yap

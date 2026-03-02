@@ -8,6 +8,7 @@
     <title>{% block title %}QuizFlow{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -38,10 +39,50 @@
     {% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        window.QUIZFLOW_IS_LOGGED_IN = {{ user.is_authenticated|lower }};
+        window.QUIZFLOW_USER = {
+            name: "{{ user.get_full_name|default:user.username|escapejs }}",
+            email: "{{ user.email|escapejs }}"
+        };
+    </script>
     <script src="{% static 'js/app-core.js' %}"></script>
     <script src="{% static 'js/app-quiz.js' %}"></script>
     <script src="{% static 'js/app-multiplayer.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const messages = [
+                {% for message in messages %}
+                { text: "{{ message|escapejs }}", level: "{{ message.tags }}" },
+                {% endfor %}
+            ];
+
+            messages.forEach(function (msg) {
+                const isError = msg.level.includes('error');
+                Toastify({
+                    text: msg.text,
+                    duration: 4000,
+                    gravity: 'top',
+                    position: 'right',
+                    stopOnFocus: true,
+                    style: {
+                        background: isError ? '#dc2626' : '#0f9d78',
+                        borderRadius: '10px',
+                        fontFamily: 'Satoshi, sans-serif',
+                        fontSize: '14px',
+                        padding: '12px 20px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                    },
+                }).showToast();
+            });
+        });
+    </script>
+    {% endif %}
+
     {% block extra_scripts %}{% endblock %}
 
 </body>

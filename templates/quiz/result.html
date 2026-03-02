@@ -20,6 +20,10 @@
                 <i class="ph ph-user-circle"></i>
                 Profilim
             </button>
+            <button class="btn btn--secondary header__auth-btn header__logout-btn" onclick="window.location.href='{% url 'authentication:logout' %}'" style="display:none">
+                <i class="ph ph-sign-out"></i>
+                Çıkış
+            </button>
             <button id="themeToggle" class="theme-toggle" type="button" aria-label="Koyu moda geç">
                 <i class="ph ph-moon"></i>
                 <span data-theme-label>KOYU</span>

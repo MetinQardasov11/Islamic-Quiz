@@ -394,13 +394,6 @@
         const newPw = document.getElementById('newPassword').value;
         const confirmPw = document.getElementById('confirmNewPassword').value;
 
-        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
-
-        if (userData.password && current !== userData.password) {
-            pwError.textContent = 'Mevcut şifre yanlış.';
-            return;
-        }
-
         if (newPw !== confirmPw) {
             pwError.textContent = 'Yeni şifreler eşleşmiyor.';
             return;
@@ -411,9 +404,8 @@
             return;
         }
 
-        userData.password = newPw;
-        localStorage.setItem('quizflow-user', JSON.stringify(userData));
-        pwSuccess.textContent = 'Şifreniz başarıyla güncellendi!';
+        // TODO: AJAX ile /auth/change-password/ endpoint'ine gönderilecek
+        pwSuccess.textContent = 'Şifre değiştirme yakında aktif olacak.';
         pwForm.reset();
     });
 
@@ -425,38 +417,32 @@
 
         if (!name || !email) return;
 
-        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
-        userData.name = name;
-        userData.email = email;
-        localStorage.setItem('quizflow-user', JSON.stringify(userData));
-
         document.getElementById('profileName').textContent = name;
         document.getElementById('profileEmail').textContent = email;
 
-        alert('Profil bilgileri güncellendi!');
+        // TODO: AJAX ile /auth/update-profile/ endpoint'ine gönderilecek
+        alert('Profil bilgileri güncellendi! (Backend entegrasyonu yakında)');
     });
 
     function handleLogout() {
-        localStorage.removeItem('quizflow-logged-in');
-        window.location.href = '{% url "authentication:login" %}';
+        window.location.href = '{% url "authentication:logout" %}';
     }
 
     function loadProfileData() {
-        const userData = JSON.parse(localStorage.getItem('quizflow-user') || '{}');
-        const isLoggedIn = localStorage.getItem('quizflow-logged-in') === 'true';
-
-        if (!isLoggedIn) {
+        if (!window.QUIZFLOW_IS_LOGGED_IN) {
             window.location.href = '{% url "authentication:login" %}';
             return;
         }
 
-        if (userData.name) {
-            document.getElementById('profileName').textContent = userData.name;
-            document.getElementById('profileFullName').value = userData.name;
+        const user = window.QUIZFLOW_USER || {};
+
+        if (user.name) {
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileFullName').value = user.name;
         }
-        if (userData.email) {
-            document.getElementById('profileEmail').textContent = userData.email;
-            document.getElementById('profileEmailInput').value = userData.email;
+        if (user.email) {
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profileEmailInput').value = user.email;
         }
 
         const quizHistory = JSON.parse(localStorage.getItem('quizflow-history') || '[]');

@@ -47,13 +47,17 @@
             <h2 class="auth__heading">Doğrulama Kodu</h2>
             <p class="auth__subheading">Kodunu gir ve yeni şifre oluşturma ekranına geç.</p>
 
-            <form class="auth-form" action="{% url 'authentication:set_new_password' %}">
-                <label class="form-label" for="otpCode">6 Haneli Kod</label>
+            <form class="auth-form" method="post" action="{% url 'authentication:otp' %}">
+                {% csrf_token %}
+
+                <label class="form-label" for="{{ form.code.id_for_label }}">6 Haneli Kod</label>
                 <div class="form-field--icon">
                     <i class="ph ph-password"></i>
-                    <input id="otpCode" name="otpCode" class="form-control" type="text" required
-                        inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="123456">
+                    {{ form.code }}
                 </div>
+                {% if form.code.errors %}
+                <p class="form-error">{{ form.code.errors.0 }}</p>
+                {% endif %}
 
                 <button type="submit" class="btn btn--primary btn--block">
                     Kodu Doğrula
