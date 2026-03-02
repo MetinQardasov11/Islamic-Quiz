@@ -504,7 +504,7 @@ function startQuiz(quizId) {
 }
 
 function isUserLoggedIn() {
-    return localStorage.getItem('quizflow-logged-in') === 'true';
+    return window.QUIZFLOW_IS_LOGGED_IN === true;
 }
 
 function showLoginRequiredModal() {

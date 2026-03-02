@@ -3,7 +3,9 @@
     "allow": [
       "Bash(source venv/bin/activate)",
       "Bash(python manage.py makemigrations authentication)",
-      "Bash(python manage.py migrate)"
+      "Bash(python manage.py migrate)",
+      "Bash(python3 manage.py makemigrations base)",
+      "Bash(python3 manage.py migrate)"
     ]
   }
 }

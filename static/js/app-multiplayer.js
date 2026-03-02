@@ -1,8 +1,6 @@
 function initMultiplayer() {
-    if (typeof isUserLoggedIn === 'function' && !isUserLoggedIn()) {
-        if (typeof showLoginRequiredModal === 'function') {
-            showLoginRequiredModal();
-        }
+    if (!window.QUIZFLOW_IS_LOGGED_IN) {
+        window.location.href = '/auth/login/?next=/multiplayer/';
         return;
     }
 
@@ -293,10 +291,13 @@ function finishMultiplayerQuiz(reason) {
     const playerTwoScore = calculateMultiplayerScore(1);
 
     let winnerText = 'Maç Berabere!';
+    let winnerName = 'draw';
     if (playerOneScore > playerTwoScore) {
         winnerText = `${multiplayerPlayers[0].name} kazandı!`;
+        winnerName = multiplayerPlayers[0].name;
     } else if (playerTwoScore > playerOneScore) {
         winnerText = `${multiplayerPlayers[1].name} kazandı!`;
+        winnerName = multiplayerPlayers[1].name;
     }
 
     const subtitle = reason === 'time_up'
@@ -312,6 +313,48 @@ function finishMultiplayerQuiz(reason) {
     document.getElementById('multiplayerPlayerTwoResultScore').textContent = `${playerTwoScore}/${totalQuestions}`;
 
     setMultiplayerView('result');
+
+    saveMultiplayerSession({
+        quiz_id: multiplayerQuiz.id,
+        quiz_title: multiplayerQuiz.title,
+        player_one_name: multiplayerPlayers[0].name,
+        player_two_name: multiplayerPlayers[1].name,
+        player_one_score: playerOneScore,
+        player_two_score: playerTwoScore,
+        total_questions: totalQuestions,
+        winner: winnerName,
+        status: reason,
+    });
+}
+
+function getCsrfToken() {
+    const name = 'csrftoken';
+    for (const cookie of document.cookie.split(';')) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === name) {
+            return decodeURIComponent(value);
+        }
+    }
+    return '';
+}
+
+async function saveMultiplayerSession(payload) {
+    if (!window.QUIZFLOW_IS_LOGGED_IN) {
+        return;
+    }
+
+    try {
+        await fetch('/api/multiplayer/save/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            body: JSON.stringify(payload),
+        });
+    } catch (error) {
+        console.warn('Maç kaydedilemedi:', error);
+    }
 }
 
 function confirmMultiplayerQuit() {

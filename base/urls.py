@@ -13,4 +13,5 @@ urlpatterns = [
     path('review/', views.review, name='review'),
     path('multiplayer/', views.multiplayer, name='multiplayer'),
     path('404/', views.page_not_found, name='page_not_found'),
+    path('api/multiplayer/save/', views.save_multiplayer_session, name='save_multiplayer_session'),
 ]
