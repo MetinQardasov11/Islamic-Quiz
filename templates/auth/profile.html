@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Profilim - QuizFlow{% endblock %}
+{% block title %}Profilim{% if site_settings %} - {{ site_settings.site_name }}{% endif %}{% endblock %}
 
 {% block extra_head %}
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap"
@@ -10,13 +10,18 @@
 {% block header %}
 <header class="header">
     <div class="header__container">
-        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <a class="header__logo" href="{% url 'base:index' %}">
+            {% if site_settings and site_settings.site_logo_url %}
+            <img src="{{ site_settings.site_logo_url }}" alt="{{ site_settings.site_name }}" class="header__logo-image">
+            {% endif %}
+            <span>{% if site_settings %}{{ site_settings.site_name }}{% endif %}</span>
+        </a>
         <div class="header__actions">
             <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:index' %}'">
                 <i class="ph ph-house"></i>
                 Ana Sayfa
             </button>
-            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:quizzes' %}'">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'quiz:quizzes' %}'">
                 <i class="ph ph-grid-four"></i>
                 Quizler
             </button>
@@ -38,28 +43,28 @@
                 <i class="ph ph-user-circle"></i>
             </div>
             <div class="profile__identity">
-                <h1 class="profile__name" id="profileName">Ahmet Yılmaz</h1>
-                <p class="profile__email" id="profileEmail">ahmet@mail.com</p>
+                <h1 class="profile__name" id="profileName">{{ profile_user.get_full_name|default:profile_user.username }}</h1>
+                <p class="profile__email" id="profileEmail">{{ profile_user.email }}</p>
                 <p class="profile__joined">
                     <i class="ph ph-calendar-blank"></i>
-                    Katılım: Mart 2026
+                    Katılım: {{ profile_user.date_joined|date:"F Y" }}
                 </p>
             </div>
             <div class="profile__quick-stats">
                 <div class="profile__stat">
-                    <span class="profile__stat-value" id="totalQuizzes">12</span>
+                    <span class="profile__stat-value" id="totalQuizzes">{{ total_quizzes }}</span>
                     <span class="profile__stat-label">Quiz Çözüldü</span>
                 </div>
                 <div class="profile__stat">
-                    <span class="profile__stat-value" id="avgScore">78%</span>
+                    <span class="profile__stat-value" id="avgScore">{{ avg_score }}%</span>
                     <span class="profile__stat-label">Ortalama Skor</span>
                 </div>
                 <div class="profile__stat">
-                    <span class="profile__stat-value" id="totalCorrect">48</span>
+                    <span class="profile__stat-value" id="totalCorrect">{{ profile_obj.total_correct_answers }}</span>
                     <span class="profile__stat-label">Doğru Cevap</span>
                 </div>
                 <div class="profile__stat">
-                    <span class="profile__stat-value" id="bestScore">95%</span>
+                    <span class="profile__stat-value" id="bestScore">{{ best_score }}%</span>
                     <span class="profile__stat-label">En İyi Skor</span>
                 </div>
             </div>
@@ -79,7 +84,7 @@
                         </div>
                         <div>
                             <p class="profile__detail-label">Geçilen Quiz</p>
-                            <p class="profile__detail-value" id="passedQuizzes">9</p>
+                            <p class="profile__detail-value" id="passedQuizzes">{{ passed_count }}</p>
                         </div>
                     </div>
                     <div class="profile__detail-card">
@@ -88,7 +93,7 @@
                         </div>
                         <div>
                             <p class="profile__detail-label">Kalınan Quiz</p>
-                            <p class="profile__detail-value" id="failedQuizzes">3</p>
+                            <p class="profile__detail-value" id="failedQuizzes">{{ failed_count }}</p>
                         </div>
                     </div>
                     <div class="profile__detail-card">
@@ -97,7 +102,7 @@
                         </div>
                         <div>
                             <p class="profile__detail-label">Toplam Süre</p>
-                            <p class="profile__detail-value" id="totalTime">18 dk</p>
+                            <p class="profile__detail-value" id="totalTime">{{ total_time_display }}</p>
                         </div>
                     </div>
                     <div class="profile__detail-card">
@@ -106,7 +111,7 @@
                         </div>
                         <div>
                             <p class="profile__detail-label">Başarı Oranı</p>
-                            <p class="profile__detail-value" id="successRate">75%</p>
+                            <p class="profile__detail-value" id="successRate">{{ success_rate }}%</p>
                         </div>
                     </div>
                 </div>
@@ -118,34 +123,17 @@
                     Kategori Performansı
                 </h2>
                 <div class="profile__category-list" id="categoryPerformance">
+                    {% for item in category_performance %}
                     <div class="profile__category-item">
-                        <span class="profile__category-name">Teknoloji</span>
+                        <span class="profile__category-name">{{ item.name }}</span>
                         <div class="profile__category-bar">
-                            <div class="profile__category-fill" style="width: 85%"></div>
+                            <div class="profile__category-fill" style="width: {{ item.average }}%"></div>
                         </div>
-                        <span class="profile__category-score">85%</span>
+                        <span class="profile__category-score">{{ item.average }}%</span>
                     </div>
-                    <div class="profile__category-item">
-                        <span class="profile__category-name">Bilim</span>
-                        <div class="profile__category-bar">
-                            <div class="profile__category-fill" style="width: 72%"></div>
-                        </div>
-                        <span class="profile__category-score">72%</span>
-                    </div>
-                    <div class="profile__category-item">
-                        <span class="profile__category-name">Tarih</span>
-                        <div class="profile__category-bar">
-                            <div class="profile__category-fill" style="width: 68%"></div>
-                        </div>
-                        <span class="profile__category-score">68%</span>
-                    </div>
-                    <div class="profile__category-item">
-                        <span class="profile__category-name">Genel Kültür</span>
-                        <div class="profile__category-bar">
-                            <div class="profile__category-fill" style="width: 90%"></div>
-                        </div>
-                        <span class="profile__category-score">90%</span>
-                    </div>
+                    {% empty %}
+                    <p>Henüz kategori performansı oluşmadı.</p>
+                    {% endfor %}
                 </div>
             </section>
 
@@ -155,36 +143,19 @@
                     Son Quizler
                 </h2>
                 <div class="profile__history" id="quizHistory">
+                    {% for attempt in recent_attempts %}
                     <div class="profile__history-item">
                         <div class="profile__history-info">
-                            <p class="profile__history-title">JavaScript Temelleri</p>
-                            <p class="profile__history-meta">Teknoloji · Kolay · 5 soru</p>
+                            <p class="profile__history-title">{{ attempt.quiz.title }}</p>
+                            <p class="profile__history-meta">{{ attempt.quiz.category.name }} · {{ attempt.quiz.get_difficulty_display }} · {{ attempt.total_questions }} soru</p>
                         </div>
-                        <span class="profile__history-score profile__history-score--pass">90%</span>
+                        <span class="profile__history-score profile__history-score--{% if attempt.passed %}pass{% else %}fail{% endif %}">{{ attempt.percentage }}%</span>
                     </div>
-                    <div class="profile__history-item">
-                        <div class="profile__history-info">
-                            <p class="profile__history-title">Dünya Tarihi</p>
-                            <p class="profile__history-meta">Tarih · Orta · 8 soru</p>
-                        </div>
-                        <span class="profile__history-score profile__history-score--pass">75%</span>
-                    </div>
-                    <div class="profile__history-item">
-                        <div class="profile__history-info">
-                            <p class="profile__history-title">Fizik Yasaları</p>
-                            <p class="profile__history-meta">Bilim · Zor · 6 soru</p>
-                        </div>
-                        <span class="profile__history-score profile__history-score--fail">55%</span>
-                    </div>
-                    <div class="profile__history-item">
-                        <div class="profile__history-info">
-                            <p class="profile__history-title">Genel Kültür Testi</p>
-                            <p class="profile__history-meta">Genel Kültür · Kolay · 10 soru</p>
-                        </div>
-                        <span class="profile__history-score profile__history-score--pass">95%</span>
-                    </div>
+                    {% empty %}
+                    <p>Henüz quiz geçmişi oluşmadı.</p>
+                    {% endfor %}
                 </div>
-                <button class="btn btn--secondary profile__history-btn" onclick="window.location.href='{% url 'base:quizzes' %}'">
+                <button class="btn btn--secondary profile__history-btn" onclick="window.location.href='{% url 'quiz:quizzes' %}'">
                     <i class="ph ph-arrow-right"></i>
                     Tüm Quizleri Gör
                 </button>
@@ -220,7 +191,7 @@
                                     <div class="form-field--icon">
                                         <i class="ph ph-user"></i>
                                         <input id="profileFullName" class="form-control" type="text"
-                                            value="Ahmet Yılmaz" placeholder="Ad Soyad">
+                                            value="{{ profile_user.get_full_name|default:profile_user.username }}" placeholder="Ad Soyad">
                                     </div>
                                 </div>
                                 <div>
@@ -228,7 +199,7 @@
                                     <div class="form-field--icon">
                                         <i class="ph ph-envelope-simple"></i>
                                         <input id="profileEmailInput" class="form-control" type="email"
-                                            value="ahmet@mail.com" placeholder="E-posta adresi">
+                                            value="{{ profile_user.email }}" placeholder="E-posta adresi">
                                     </div>
                                 </div>
                             </div>
@@ -341,10 +312,10 @@
 
 {% block footer_links %}
 <a class="site-footer__link" href="{% url 'base:index' %}">Ana Sayfa</a>
-<a class="site-footer__link" href="{% url 'base:quizzes' %}">Quizler</a>
+<a class="site-footer__link" href="{% url 'quiz:quizzes' %}">Quizler</a>
 <a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
 <a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
-<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+<a class="site-footer__link" href="{% url 'quiz:multiplayer' %}">2 Oyunculu Mod</a>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -368,7 +339,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         const currentTheme = document.body.classList.contains('theme-dark') ? 'dark' : 'light';
         updateThemeButtons(currentTheme);
-        loadProfileData();
     });
 
     document.querySelectorAll('.toggle-pw-btn').forEach(btn => {
@@ -385,7 +355,53 @@
     const pwError = document.getElementById('pwChangeError');
     const pwSuccess = document.getElementById('pwChangeSuccess');
 
-    pwForm.addEventListener('submit', (e) => {
+    const infoForm = document.getElementById('profileInfoForm');
+    infoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('profileFullName').value.trim();
+        const email = document.getElementById('profileEmailInput').value.trim();
+
+        if (!name || !email) return;
+
+        const response = await fetch('{% url "authentication:update_profile" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            body: JSON.stringify({ name, email }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.success) {
+            alert(payload.error || 'Profil güncellenemedi.');
+            return;
+        }
+
+        document.getElementById('profileName').textContent = payload.user.name;
+        document.getElementById('profileEmail').textContent = payload.user.email;
+        alert('Profil bilgileri güncellendi.');
+    });
+
+    function handleLogout() {
+        window.location.href = '{% url "authentication:logout" %}';
+    }
+
+    function closeLoginModal() {
+        document.getElementById('loginRequiredModal').hidden = true;
+    }
+
+    function getCsrfToken() {
+        const name = 'csrftoken';
+        for (const cookie of document.cookie.split(';')) {
+            const [key, value] = cookie.trim().split('=');
+            if (key === name) {
+                return decodeURIComponent(value);
+            }
+        }
+        return '';
+    }
+
+    pwForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         pwError.textContent = '';
         pwSuccess.textContent = '';
@@ -394,114 +410,26 @@
         const newPw = document.getElementById('newPassword').value;
         const confirmPw = document.getElementById('confirmNewPassword').value;
 
-        if (newPw !== confirmPw) {
-            pwError.textContent = 'Yeni şifreler eşleşmiyor.';
+        const response = await fetch('{% url "authentication:change_password" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            body: JSON.stringify({
+                current_password: current,
+                new_password: newPw,
+                confirm_password: confirmPw,
+            }),
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.success) {
+            pwError.textContent = payload.error || 'Şifre değiştirilemedi.';
             return;
         }
 
-        if (newPw.length < 6) {
-            pwError.textContent = 'Şifre en az 6 karakter olmalıdır.';
-            return;
-        }
-
-        // TODO: AJAX ile /auth/change-password/ endpoint'ine gönderilecek
-        pwSuccess.textContent = 'Şifre değiştirme yakında aktif olacak.';
+        pwSuccess.textContent = 'Şifre başarıyla güncellendi.';
         pwForm.reset();
     });
-
-    const infoForm = document.getElementById('profileInfoForm');
-    infoForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('profileFullName').value.trim();
-        const email = document.getElementById('profileEmailInput').value.trim();
-
-        if (!name || !email) return;
-
-        document.getElementById('profileName').textContent = name;
-        document.getElementById('profileEmail').textContent = email;
-
-        // TODO: AJAX ile /auth/update-profile/ endpoint'ine gönderilecek
-        alert('Profil bilgileri güncellendi! (Backend entegrasyonu yakında)');
-    });
-
-    function handleLogout() {
-        window.location.href = '{% url "authentication:logout" %}';
-    }
-
-    function loadProfileData() {
-        if (!window.QUIZFLOW_IS_LOGGED_IN) {
-            window.location.href = '{% url "authentication:login" %}';
-            return;
-        }
-
-        const user = window.QUIZFLOW_USER || {};
-
-        if (user.name) {
-            document.getElementById('profileName').textContent = user.name;
-            document.getElementById('profileFullName').value = user.name;
-        }
-        if (user.email) {
-            document.getElementById('profileEmail').textContent = user.email;
-            document.getElementById('profileEmailInput').value = user.email;
-        }
-
-        const quizHistory = JSON.parse(localStorage.getItem('quizflow-history') || '[]');
-        if (quizHistory.length > 0) {
-            const total = quizHistory.length;
-            const passed = quizHistory.filter(q => q.score >= 70).length;
-            const failed = total - passed;
-            const avgScore = Math.round(quizHistory.reduce((a, b) => a + b.score, 0) / total);
-            const bestScore = Math.max(...quizHistory.map(q => q.score));
-            const totalCorrect = quizHistory.reduce((a, b) => a + (b.correct || 0), 0);
-
-            document.getElementById('totalQuizzes').textContent = total;
-            document.getElementById('avgScore').textContent = avgScore + '%';
-            document.getElementById('totalCorrect').textContent = totalCorrect;
-            document.getElementById('bestScore').textContent = bestScore + '%';
-            document.getElementById('passedQuizzes').textContent = passed;
-            document.getElementById('failedQuizzes').textContent = failed;
-            document.getElementById('successRate').textContent = Math.round((passed / total) * 100) + '%';
-
-            const historyContainer = document.getElementById('quizHistory');
-            historyContainer.innerHTML = quizHistory.slice(-4).reverse().map(q => `
-                <div class="profile__history-item">
-                    <div class="profile__history-info">
-                        <p class="profile__history-title">${escapeHtml(q.title || 'Quiz')}</p>
-                        <p class="profile__history-meta">${escapeHtml(q.category || '')} · ${escapeHtml(q.difficulty || '')} · ${q.totalQuestions || 0} soru</p>
-                    </div>
-                    <span class="profile__history-score profile__history-score--${q.score >= 70 ? 'pass' : 'fail'}">${q.score}%</span>
-                </div>
-            `).join('');
-
-            const categories = {};
-            quizHistory.forEach(q => {
-                if (q.category) {
-                    if (!categories[q.category]) categories[q.category] = [];
-                    categories[q.category].push(q.score);
-                }
-            });
-
-            const catContainer = document.getElementById('categoryPerformance');
-            const catEntries = Object.entries(categories);
-            if (catEntries.length > 0) {
-                catContainer.innerHTML = catEntries.map(([name, scores]) => {
-                    const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
-                    return `
-                        <div class="profile__category-item">
-                            <span class="profile__category-name">${escapeHtml(name)}</span>
-                            <div class="profile__category-bar">
-                                <div class="profile__category-fill" style="width: ${avg}%"></div>
-                            </div>
-                            <span class="profile__category-score">${avg}%</span>
-                        </div>
-                    `;
-                }).join('');
-            }
-        }
-    }
-
-    function closeLoginModal() {
-        document.getElementById('loginRequiredModal').hidden = true;
-    }
 </script>
 {% endblock %}

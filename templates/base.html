@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}QuizFlow{% endblock %}</title>
+    <title>{% block title %}{% if site_settings %}{{ site_settings.site_name }}{% endif %}{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -21,20 +21,40 @@
 
     {% block footer %}
     <footer class="site-footer" aria-label="Alt bilgi">
-        <div class="site-footer__brand">
-            <p class="site-footer__title">QuizFlow</p>
-            <p class="site-footer__copy">{% block footer_copy %}Bilgini güçlendiren modern quiz deneyimi.{% endblock %}</p>
+        <div class="site-footer__top">
+            <div class="site-footer__brand">
+                {% if site_settings and site_settings.site_logo_url %}
+                <img src="{{ site_settings.site_logo_url }}" alt="{{ site_settings.site_name }}" class="site-footer__logo-image">
+                {% endif %}
+                <p class="site-footer__title">{% if site_settings %}{{ site_settings.site_name }}{% endif %}</p>
+                <p class="site-footer__copy">{% block footer_copy %}{% if site_settings %}{{ site_settings.footer_copy }}{% endif %}{% endblock %}</p>
+            </div>
+            <div class="site-footer__social">
+                <p class="site-footer__social-label">Sosyal Medya Adresleri</p>
+                <div class="site-footer__social-links">
+                    {% for social_link in site_social_links %}
+                    <a class="site-footer__social-link" href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social_link.label }}">
+                        <i class="{{ social_link.icon_class }}"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <div class="site-footer__links">
-            {% block footer_links %}
-            <a class="site-footer__link" href="index.html">Ana Sayfa</a>
-            <a class="site-footer__link" href="quizzes.html">Quizler</a>
-            <a class="site-footer__link" href="profile.html">Profilim</a>
-            <a class="site-footer__link" href="sss.html">SSS</a>
-            <a class="site-footer__link" href="kullanim-sartlari.html">Kullanım Şartları</a>
-            {% endblock %}
+        <div class="site-footer__bottom">
+            <div class="site-footer__links">
+                {% block footer_links %}
+                <a class="site-footer__link" href="index.html">Ana Sayfa</a>
+                <a class="site-footer__link" href="quizzes.html">Quizler</a>
+                <a class="site-footer__link" href="profile.html">Profilim</a>
+                <a class="site-footer__link" href="sss.html">SSS</a>
+                <a class="site-footer__link" href="kullanim-sartlari.html">Kullanım Şartları</a>
+                {% endblock %}
+            </div>
+            <button type="button" class="site-footer__top-button" aria-label="Sayfanın başına dön" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+                <i class="ph ph-arrow-up"></i>
+            </button>
         </div>
-        <p class="site-footer__meta">QuizFlow (c) 2026</p>
+        <p class="site-footer__meta">{% if site_settings %}{{ site_settings.footer_meta }}{% endif %}</p>
     </footer>
     {% endblock %}
 

@@ -1,0 +1,110 @@
+.hidden-compat-fields {
+    display: none;
+}
+
+.quiz-question .form-row,
+.change-form .fieldBox {
+    box-sizing: border-box;
+}
+
+.quiz-answer-option-inline h2,
+#answer_options-group h2,
+#quizansweroption_set-group h2 {
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+}
+
+#quizansweroption_set-group .inline-group {
+    border: 0;
+    background: transparent;
+}
+
+#quizansweroption_set-group .inline-related {
+    border: 1px solid #d7deea;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+#quizansweroption_set-group .inline-related h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #eff6ff 0%, #f8fafc 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.quiz-answer-card__title {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.quiz-answer-card__badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    background: #e2e8f0;
+}
+
+.quiz-answer-card__badge.is-correct {
+    color: #166534;
+    background: #dcfce7;
+}
+
+#quizansweroption_set-group .inline-related .form-row {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+#quizansweroption_set-group .inline-related .form-row.field-display_order,
+#quizansweroption_set-group .inline-related .form-row.field-is_correct,
+#quizansweroption_set-group .inline-related .form-row.field-is_active {
+    display: inline-block;
+    vertical-align: top;
+    width: 33.33%;
+}
+
+#quizansweroption_set-group .inline-related .form-row.field-image_source_mode,
+.form-row.field-image_source_mode {
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+#quizansweroption_set-group .inline-related .form-row.field-text textarea,
+#quizansweroption_set-group .inline-related .form-row.field-text input[type="text"],
+#quizansweroption_set-group .inline-related .form-row.field-image input[type="url"],
+#quizansweroption_set-group .inline-related .form-row.field-image_file input[type="file"],
+#quizansweroption_set-group .inline-related .form-row.field-image_alt input[type="text"] {
+    width: 100%;
+    max-width: none;
+    border-radius: 10px;
+}
+
+.form-row.field-image input[type="url"],
+.form-row.field-image_file input[type="file"] {
+    width: 100%;
+    max-width: none;
+    border-radius: 10px;
+}
+
+#quizansweroption_set-group .inline-related .delete {
+    padding: 0 18px 14px;
+}
+
+#quizansweroption_set-group .add-row a,
+#quizansweroption_set-group .inline-deletelink {
+    border-radius: 10px;
+}
+
+.hidden-compat-fields .form-row {
+    display: none;
+}

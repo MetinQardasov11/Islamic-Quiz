@@ -224,11 +224,12 @@ function renderMultiplayerActivePlayerOptions(question) {
     const selectedAnswer = multiplayerPlayers[activePlayerIndex].answers[multiplayerQuestionIndex];
     const isLocked = haveBothPlayersAnsweredCurrentQuestion();
 
+    const optionType = getQuestionOptionType(question);
     container.innerHTML = question.options.map((option, optionIndex) => `
-        <button class="option ${selectedAnswer === optionIndex ? 'selected' : ''}"
+        <button class="option ${optionType === 'image' ? 'option--image' : ''} ${selectedAnswer === optionIndex ? 'selected' : ''}"
                 onclick="selectMultiplayerOption(${activePlayerIndex}, ${optionIndex})"
                 ${isLocked ? 'disabled' : ''}>
-            ${option}
+            ${getOptionContentMarkup(option, optionType)}
         </button>
     `).join('');
 }

@@ -1,12 +1,20 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import (
     authenticate,
     login as auth_login,
     logout as auth_logout,
+    update_session_auth_hash,
 )
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+from content.models import SiteSettings
+from quiz.models import QuizAttempt
 
 from .models import User, OTPCode
 from .forms import (
@@ -23,14 +31,15 @@ from .forms import (
 # ---------------------------------------------------------------------------
 
 def _send_otp_email(user: User, otp: OTPCode) -> None:
-    subject = 'QuizFlow — Şifre Sıfırlama Kodunuz'
+    site_name = SiteSettings.objects.order_by('id').values_list('site_name', flat=True).first() or 'Quiz'
+    subject = f'{site_name} — Şifre Sıfırlama Kodunuz'
     body = (
         f'Merhaba {user.first_name or user.username},\n\n'
         f'Şifre sıfırlama talebiniz için doğrulama kodunuz:\n\n'
         f'    {otp.code}\n\n'
         f'Bu kod {OTPCode.EXPIRY_MINUTES} dakika boyunca geçerlidir.\n'
         f'Eğer bu isteği siz yapmadıysanız bu e-postayı dikkate almayınız.\n\n'
-        f'— QuizFlow Ekibi'
+        f'— {site_name} Ekibi'
     )
     send_mail(
         subject=subject,
@@ -47,7 +56,7 @@ def _send_otp_email(user: User, otp: OTPCode) -> None:
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('base:quizzes')
+        return redirect('quiz:quizzes')
 
     form = RegisterForm(request.POST or None)
 
@@ -101,7 +110,7 @@ def login(request):
             auth_login(request, user)
             if not remember_me:
                 request.session.set_expiry(0)
-            next_url = request.GET.get('next') or 'base:quizzes'
+            next_url = request.GET.get('next') or 'quiz:quizzes'
             messages.success(request, f'Hoş geldin, {user.first_name or user.email}!')
             return redirect(next_url)
 
@@ -127,7 +136,118 @@ def logout(request):
 def profile(request):
     if not request.user.is_authenticated:
         return redirect('authentication:login')
-    return render(request, 'auth/profile.html')
+
+    profile_obj = request.user.profile
+    attempts = list(
+        QuizAttempt.objects.filter(user=request.user)
+        .select_related('quiz', 'quiz__category')
+        .order_by('-created_at')
+    )
+
+    total_quizzes = profile_obj.total_quizzes_completed
+    avg_score = round((profile_obj.total_score / total_quizzes), 1) if total_quizzes else 0
+    best_score = max((attempt.percentage for attempt in attempts), default=0)
+    passed_count = sum(1 for attempt in attempts if attempt.passed)
+    failed_count = total_quizzes - passed_count
+    total_time_seconds = sum(attempt.elapsed_seconds for attempt in attempts)
+    total_time_minutes, remaining_seconds = divmod(total_time_seconds, 60)
+    if total_time_minutes and remaining_seconds:
+        total_time_display = f'{total_time_minutes} dk {remaining_seconds} sn'
+    elif total_time_minutes:
+        total_time_display = f'{total_time_minutes} dk'
+    else:
+        total_time_display = f'{remaining_seconds} sn'
+    category_stats = {}
+    for attempt in attempts:
+        category_name = attempt.quiz.category.name
+        category_stats.setdefault(category_name, []).append(attempt.percentage)
+
+    category_performance = [
+        {
+            'name': category_name,
+            'average': round(sum(scores) / len(scores)),
+        }
+        for category_name, scores in category_stats.items()
+    ]
+
+    context = {
+        'profile_user': request.user,
+        'profile_obj': profile_obj,
+        'recent_attempts': attempts[:4],
+        'total_quizzes': total_quizzes,
+        'avg_score': avg_score,
+        'best_score': best_score,
+        'passed_count': passed_count,
+        'failed_count': failed_count,
+        'success_rate': round((passed_count / total_quizzes) * 100) if total_quizzes else 0,
+        'total_time_display': total_time_display,
+        'category_performance': category_performance,
+    }
+    return render(request, 'auth/profile.html', context)
+
+
+@require_POST
+def update_profile(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'Giriş yapmalısınız.'}, status=401)
+
+    try:
+        payload = json.loads(request.body)
+    except json.JSONDecodeError as exc:
+        return JsonResponse({'success': False, 'error': str(exc)}, status=400)
+
+    full_name = str(payload.get('name', '')).strip()
+    email = str(payload.get('email', '')).strip().lower()
+
+    if not full_name or not email:
+        return JsonResponse({'success': False, 'error': 'Ad soyad ve e-posta zorunludur.'}, status=400)
+
+    if User.objects.exclude(pk=request.user.pk).filter(email=email).exists():
+        return JsonResponse({'success': False, 'error': 'Bu e-posta başka bir kullanıcıda kayıtlı.'}, status=400)
+
+    name_parts = full_name.split(' ', 1)
+    request.user.first_name = name_parts[0]
+    request.user.last_name = name_parts[1] if len(name_parts) > 1 else ''
+    request.user.email = email
+    request.user.save(update_fields=['first_name', 'last_name', 'email'])
+
+    return JsonResponse({
+        'success': True,
+        'user': {
+            'name': request.user.get_full_name() or request.user.username,
+            'email': request.user.email,
+        },
+    })
+
+
+@require_POST
+def change_password(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'Giriş yapmalısınız.'}, status=401)
+
+    try:
+        payload = json.loads(request.body)
+    except json.JSONDecodeError as exc:
+        return JsonResponse({'success': False, 'error': str(exc)}, status=400)
+
+    current_password = str(payload.get('current_password', ''))
+    new_password = str(payload.get('new_password', ''))
+    confirm_password = str(payload.get('confirm_password', ''))
+
+    if not request.user.check_password(current_password):
+        return JsonResponse({'success': False, 'error': 'Mevcut şifre hatalı.'}, status=400)
+
+    if len(new_password) < 6:
+        return JsonResponse({'success': False, 'error': 'Yeni şifre en az 6 karakter olmalıdır.'}, status=400)
+
+    if new_password != confirm_password:
+        return JsonResponse({'success': False, 'error': 'Yeni şifreler eşleşmiyor.'}, status=400)
+
+    request.user.set_password(new_password)
+    request.user.save(update_fields=['password'])
+    update_session_auth_hash(request, request.user)
+
+    return JsonResponse({'success': True})
 
 
 # ---------------------------------------------------------------------------

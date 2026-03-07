@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Quiz Seç - QuizFlow{% endblock %}
+{% block title %}Quiz Seç{% if site_settings %} - {{ site_settings.site_name }}{% endif %}{% endblock %}
 
 {% block extra_head %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,12 @@
 {% block header %}
 <header class="header">
     <div class="header__container">
-        <a class="header__logo" href="{% url 'base:index' %}"><span>Quiz Flow</span></a>
+        <a class="header__logo" href="{% url 'base:index' %}">
+            {% if site_settings and site_settings.site_logo_url %}
+            <img src="{{ site_settings.site_logo_url }}" alt="{{ site_settings.site_name }}" class="header__logo-image">
+            {% endif %}
+            <span>{% if site_settings %}{{ site_settings.site_name }}{% endif %}</span>
+        </a>
         <div class="header__actions">
             <button class="btn btn--secondary" data-testid="home-button" onclick="window.location.href='{% url 'base:index' %}'">
                 <i class="ph ph-house"></i>
@@ -98,7 +103,7 @@
         <p class="quizzes__result-count" id="quizResultCount" data-testid="quiz-result-count"></p>
 
         <div class="quizzes__mode-switch">
-            <button class="btn btn--secondary" onclick="window.location.href='{% url 'base:multiplayer' %}'">
+            <button class="btn btn--secondary" onclick="window.location.href='{% url 'quiz:multiplayer' %}'">
                 <i class="ph ph-users-three"></i>
                 2 Oyunculu Mod
             </button>
@@ -119,5 +124,5 @@
 <a class="site-footer__link" href="{% url 'authentication:profile' %}">Profilim</a>
 <a class="site-footer__link" href="{% url 'base:faq' %}">SSS</a>
 <a class="site-footer__link" href="{% url 'base:terms_of_use' %}">Kullanım Şartları</a>
-<a class="site-footer__link" href="{% url 'base:multiplayer' %}">2 Oyunculu Mod</a>
+<a class="site-footer__link" href="{% url 'quiz:multiplayer' %}">2 Oyunculu Mod</a>
 {% endblock %}

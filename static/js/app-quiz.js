@@ -2,6 +2,8 @@ function getQuizById(quizId) {
     return quizData.quizzes.find(quiz => quiz.id === quizId);
 }
 
+let currentAttemptResult = null;
+
 function getDifficultyLabel(difficulty) {
     return DIFFICULTY_LABELS[difficulty] || DIFFICULTY_LABELS.medium;
 }
@@ -592,6 +594,49 @@ function initQuiz() {
     startTimer();
 }
 
+function getQuestionOptionType(question) {
+    if (!question || typeof question.questionType !== 'string') {
+        return 'text';
+    }
+
+    if (question.questionType === 'text_question_image_answers' ||
+        question.questionType === 'image_question_image_answers') {
+        return 'image';
+    }
+
+    return 'text';
+}
+
+function getOptionContentMarkup(option, optionType) {
+    const optionText = option && typeof option.text === 'string' ? option.text : '';
+    const optionImage = option && typeof option.image === 'string' ? option.image.trim() : '';
+    const optionImageAlt = option && typeof option.imageAlt === 'string' && option.imageAlt.trim()
+        ? option.imageAlt
+        : (optionText || 'Cevap görseli');
+
+    if (optionType === 'image' && optionImage) {
+        return `
+            <span class="option__content option__content--image">
+                <img src="${optionImage}" alt="${optionImageAlt}" class="option__image" loading="lazy">
+                ${optionText ? `<span class="option__text option__text--support">${optionText}</span>` : ''}
+            </span>
+        `;
+    }
+
+    return `<span class="option__text">${optionText}</span>`;
+}
+
+function getReviewAnswerContentMarkup(labelClassName, labelText, answerText, answerImage, answerImageAlt) {
+    const hasImage = typeof answerImage === 'string' && answerImage.trim().length > 0;
+    const hasText = typeof answerText === 'string' && answerText.trim().length > 0;
+
+    return `
+        <span class="review-item__label ${labelClassName}">${labelText}</span>
+        ${hasImage ? `<img src="${answerImage}" alt="${answerImageAlt || answerText || 'Cevap görseli'}" class="review-item__answer-image" loading="lazy">` : ''}
+        ${hasText ? `<span class="review-item__answer-text">${answerText}</span>` : ''}
+    `;
+}
+
 function displayQuestion() {
     if (!currentQuiz) {
         return;
@@ -608,11 +653,12 @@ function displayQuestion() {
     renderQuestionMedia(question, 'questionMedia', 'questionImage', 'questionImageCaption');
 
     const optionsContainer = document.getElementById('optionsContainer');
+    const optionType = getQuestionOptionType(question);
     optionsContainer.innerHTML = question.options.map((option, index) => `
-        <button class="option ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}"
+        <button class="option ${optionType === 'image' ? 'option--image' : ''} ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}"
                 data-testid="option-${index}"
                 onclick="selectOption(${index})">
-            ${option}
+            ${getOptionContentMarkup(option, optionType)}
         </button>
     `).join('');
 
@@ -663,45 +709,40 @@ function finishQuiz() {
     }
 
     clearInterval(timer);
+    submitQuizAttempt();
+}
 
-    let correctCount = 0;
-    currentQuiz.questions.forEach((question, index) => {
-        if (userAnswers[index] === question.correctAnswer) {
-            correctCount++;
+async function submitQuizAttempt() {
+    if (!currentQuiz) {
+        return;
+    }
+
+    try {
+        const elapsedSeconds = Math.max((currentQuiz.timeLimit || DEFAULT_TIME_LIMIT) - timeRemaining, 0);
+        const response = await fetch('/api/attempts/submit/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            body: JSON.stringify({
+                quiz_id: currentQuiz.id,
+                answers: userAnswers,
+                elapsed_seconds: elapsedSeconds,
+            }),
+        });
+        const payload = await response.json();
+
+        if (!response.ok || !payload.success) {
+            throw new Error(payload.error || 'Quiz sonucu kaydedilemedi.');
         }
-    });
 
-    const percentage = Math.round((correctCount / currentQuiz.questions.length) * 100);
-    const passed = percentage >= quizData.passingScore;
-
-    const result = {
-        quizId: currentQuiz.id,
-        quizTitle: currentQuiz.title,
-        correctCount,
-        totalQuestions: currentQuiz.questions.length,
-        percentage,
-        passed,
-        userAnswers,
-        timestamp: new Date().toISOString()
-    };
-
-    localStorage.setItem('lastQuizResult', JSON.stringify(result));
-
-    // Save to quiz history for profile
-    const historyEntry = {
-        title: currentQuiz.title,
-        category: currentQuiz.category || '',
-        difficulty: DIFFICULTY_LABELS[currentQuiz.difficulty] || '',
-        totalQuestions: currentQuiz.questions.length,
-        correct: correctCount,
-        score: percentage,
-        date: new Date().toISOString()
-    };
-    const history = JSON.parse(localStorage.getItem('quizflow-history') || '[]');
-    history.push(historyEntry);
-    localStorage.setItem('quizflow-history', JSON.stringify(history));
-
-    window.location.href = '/result/';
+        currentAttemptResult = payload.attempt;
+        window.location.href = `/result/?attempt=${payload.attempt.id}`;
+    } catch (error) {
+        console.error('Quiz denemesi kaydedilemedi:', error);
+        alert('Quiz sonucu kaydedilemedi. Lütfen tekrar deneyin.');
+    }
 }
 
 function startTimer() {
@@ -744,58 +785,64 @@ function confirmQuit() {
 }
 
 function displayResults() {
-    const resultData = JSON.parse(localStorage.getItem('lastQuizResult'));
+    loadAttemptResult().then(resultData => {
+        if (!resultData) {
+            window.location.href = '/quizzes/';
+            return;
+        }
 
-    if (!resultData) {
-        window.location.href = '/quizzes/';
-        return;
-    }
+        const resultIcon = document.getElementById('resultIcon');
+        const resultTitle = document.getElementById('resultTitle');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreCircle = document.getElementById('scoreCircle');
+        const correctCount = document.getElementById('correctCount');
+        const totalCount = document.getElementById('totalCount');
+        const passStatus = document.getElementById('passStatus');
 
-    const resultIcon = document.getElementById('resultIcon');
-    const resultTitle = document.getElementById('resultTitle');
-    const scorePercentage = document.getElementById('scorePercentage');
-    const scoreCircle = document.getElementById('scoreCircle');
-    const correctCount = document.getElementById('correctCount');
-    const totalCount = document.getElementById('totalCount');
-    const passStatus = document.getElementById('passStatus');
+        resultIcon.classList.remove('pass', 'fail');
+        scoreCircle.classList.remove('pass', 'fail');
+        passStatus.classList.remove('pass', 'fail');
 
-    resultIcon.classList.remove('pass', 'fail');
-    scoreCircle.classList.remove('pass', 'fail');
-    passStatus.classList.remove('pass', 'fail');
+        if (resultData.passed) {
+            resultIcon.classList.add('pass');
+            resultIcon.innerHTML = '<i class="ph ph-trophy"></i>';
+            resultTitle.textContent = 'Tebrikler, Geçtin!';
+            scoreCircle.classList.add('pass');
+            passStatus.textContent = 'GEÇTİ';
+            passStatus.classList.add('pass');
+        } else {
+            resultIcon.classList.add('fail');
+            resultIcon.innerHTML = '<i class="ph ph-x-circle"></i>';
+            resultTitle.textContent = 'Quiz Tamamlandı';
+            scoreCircle.classList.add('fail');
+            passStatus.textContent = 'KALDI';
+            passStatus.classList.add('fail');
+        }
 
-    if (resultData.passed) {
-        resultIcon.classList.add('pass');
-        resultIcon.innerHTML = '<i class="ph ph-trophy"></i>';
-        resultTitle.textContent = 'Tebrikler, Geçtin!';
-        scoreCircle.classList.add('pass');
-        passStatus.textContent = 'GEÇTİ';
-        passStatus.classList.add('pass');
-    } else {
-        resultIcon.classList.add('fail');
-        resultIcon.innerHTML = '<i class="ph ph-x-circle"></i>';
-        resultTitle.textContent = 'Quiz Tamamlandı';
-        scoreCircle.classList.add('fail');
-        passStatus.textContent = 'KALDI';
-        passStatus.classList.add('fail');
-    }
-
-    scorePercentage.textContent = `${resultData.percentage}%`;
-    correctCount.textContent = resultData.correctCount;
-    totalCount.textContent = resultData.totalQuestions;
+        scorePercentage.textContent = `${resultData.percentage}%`;
+        correctCount.textContent = resultData.correctCount;
+        totalCount.textContent = resultData.totalQuestions;
+    });
 }
 
 function reviewAnswers() {
-    window.location.href = '/review/';
-}
-
-function playAgain() {
-    const resultData = JSON.parse(localStorage.getItem('lastQuizResult'));
-    if (!resultData) {
+    const attemptId = getAttemptIdFromUrl();
+    if (!attemptId) {
         window.location.href = '/quizzes/';
         return;
     }
+    window.location.href = `/review/?attempt=${attemptId}`;
+}
 
-    window.location.href = `/quiz/?id=${resultData.quizId}`;
+function playAgain() {
+    loadAttemptResult().then(resultData => {
+        if (!resultData) {
+            window.location.href = '/quizzes/';
+            return;
+        }
+
+        window.location.href = `/quiz/?id=${resultData.quizId}`;
+    });
 }
 
 function goHome() {
@@ -803,53 +850,101 @@ function goHome() {
 }
 
 function displayReview() {
-    const resultData = JSON.parse(localStorage.getItem('lastQuizResult'));
+    loadAttemptResult().then(resultData => {
+        if (!resultData) {
+            window.location.href = '/quizzes/';
+            return;
+        }
 
-    if (!resultData) {
-        window.location.href = '/quizzes/';
-        return;
-    }
+        const reviewSubtitle = document.getElementById('reviewSubtitle');
+        reviewSubtitle.textContent =
+            `${resultData.quizTitle} - ${resultData.correctCount}/${resultData.totalQuestions} doğru (%${resultData.percentage})`;
 
-    const quiz = getQuizById(resultData.quizId);
+        const reviewList = document.getElementById('reviewList');
+        reviewList.innerHTML = resultData.answers.map((answer, index) => {
+            const imageMarkup = answer.image ? `
+                <figure class="question-media question-media--review">
+                    <img src="${answer.image}" alt="${answer.imageAlt || 'Soru görseli'}" class="question-media__image" loading="lazy">
+                    ${answer.imageCaption ? `<figcaption class="question-media__caption">${answer.imageCaption}</figcaption>` : ''}
+                </figure>
+            ` : '';
 
-    if (!quiz) {
-        window.location.href = '/quizzes/';
-        return;
-    }
-
-    const reviewSubtitle = document.getElementById('reviewSubtitle');
-    reviewSubtitle.textContent =
-        `${resultData.quizTitle} - ${resultData.correctCount}/${resultData.totalQuestions} doğru (%${resultData.percentage})`;
-
-    const reviewList = document.getElementById('reviewList');
-    reviewList.innerHTML = quiz.questions.map((question, index) => {
-        const userAnswer = resultData.userAnswers[index];
-        const isCorrect = userAnswer === question.correctAnswer;
-
-        return `
-            <div class="review-item ${isCorrect ? 'correct' : 'incorrect'}" data-testid="review-item-${index}">
-                <div class="review-item__header">
-                    <span class="review-item__number">Soru ${index + 1}</span>
-                    <span class="review-item__status ${isCorrect ? 'correct' : 'incorrect'}" data-testid="review-status-${index}">
-                        <i class="ph ${isCorrect ? 'ph-check-circle' : 'ph-x-circle'}"></i>
-                        ${isCorrect ? 'Doğru' : 'Yanlış'}
-                    </span>
-                </div>
-                <p class="review-item__question">${question.question}</p>
-                ${getReviewQuestionMediaMarkup(question)}
-                <div class="review-item__answers">
-                    ${!isCorrect && userAnswer !== null ? `
-                        <div class="review-item__answer user-wrong">
-                            <span class="review-item__label incorrect">Senin Cevabın:</span>
-                            ${question.options[userAnswer]}
+            return `
+                <div class="review-item ${answer.isCorrect ? 'correct' : 'incorrect'}" data-testid="review-item-${index}">
+                    <div class="review-item__header">
+                        <span class="review-item__number">Soru ${index + 1}</span>
+                        <span class="review-item__status ${answer.isCorrect ? 'correct' : 'incorrect'}" data-testid="review-status-${index}">
+                            <i class="ph ${answer.isCorrect ? 'ph-check-circle' : 'ph-x-circle'}"></i>
+                            ${answer.isCorrect ? 'Doğru' : 'Yanlış'}
+                        </span>
+                    </div>
+                    <p class="review-item__question">${answer.questionText}</p>
+                    ${imageMarkup}
+                    <div class="review-item__answers">
+                        ${!answer.isCorrect && answer.selectedAnswerIndex !== null ? `
+                            <div class="review-item__answer user-wrong">
+                                ${getReviewAnswerContentMarkup(
+                                    'incorrect',
+                                    'Senin Cevabın:',
+                                    answer.selectedAnswerText,
+                                    answer.selectedAnswerImage,
+                                    answer.selectedAnswerImageAlt
+                                )}
+                            </div>
+                        ` : ''}
+                        <div class="review-item__answer correct-answer">
+                            ${getReviewAnswerContentMarkup(
+                                'correct',
+                                'Doğru Cevap:',
+                                answer.correctAnswerText,
+                                answer.correctAnswerImage,
+                                answer.correctAnswerImageAlt
+                            )}
                         </div>
-                    ` : ''}
-                    <div class="review-item__answer correct-answer">
-                        <span class="review-item__label correct">Doğru Cevap:</span>
-                        ${question.options[question.correctAnswer]}
                     </div>
                 </div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+    });
+}
+
+function getAttemptIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const attemptId = Number.parseInt(urlParams.get('attempt'), 10);
+    return Number.isNaN(attemptId) ? null : attemptId;
+}
+
+async function loadAttemptResult() {
+    if (currentAttemptResult) {
+        return currentAttemptResult;
+    }
+
+    const attemptId = getAttemptIdFromUrl();
+    if (!attemptId) {
+        return null;
+    }
+
+    try {
+        const response = await fetch(`/api/attempts/${attemptId}/`);
+        const payload = await response.json();
+        if (!response.ok || !payload.success) {
+            throw new Error(payload.error || 'Deneme sonucu yüklenemedi.');
+        }
+        currentAttemptResult = payload.attempt;
+        return currentAttemptResult;
+    } catch (error) {
+        console.error('Deneme sonucu yüklenemedi:', error);
+        return null;
+    }
+}
+
+function getCsrfToken() {
+    const name = 'csrftoken';
+    for (const cookie of document.cookie.split(';')) {
+        const [key, value] = cookie.trim().split('=');
+        if (key === name) {
+            return decodeURIComponent(value);
+        }
+    }
+    return '';
 }

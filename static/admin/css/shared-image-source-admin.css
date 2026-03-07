@@ -1,0 +1,20 @@
+.form-row.field-thumbnail_source_mode,
+.form-row.field-image_source_mode,
+.form-row.field-site_logo_source_mode,
+.form-row.field-hero_image_source_mode {
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.form-row.field-thumbnail input[type="url"],
+.form-row.field-thumbnail_file input[type="file"],
+.form-row.field-image input[type="url"],
+.form-row.field-image_file input[type="file"],
+.form-row.field-site_logo input[type="url"],
+.form-row.field-site_logo_file input[type="file"],
+.form-row.field-hero_image input[type="url"],
+.form-row.field-hero_image_file input[type="file"] {
+    width: 100%;
+    max-width: none;
+    border-radius: 10px;
+}

@@ -17,7 +17,6 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'level', 'xp_points', 'total_quizzes_completed', 'current_streak', 'accuracy_rate')
-    list_filter = ('level',)
     search_fields = ('user__email', 'user__username')
     readonly_fields = ('accuracy_rate', 'xp_for_next_level', 'created_at', 'updated_at')
 
@@ -25,6 +24,5 @@ class UserProfileAdmin(admin.ModelAdmin):
 @admin.register(OTPCode)
 class OTPCodeAdmin(admin.ModelAdmin):
     list_display = ('user', 'purpose', 'code', 'is_used', 'expires_at', 'created_at')
-    list_filter = ('purpose', 'is_used')
     search_fields = ('user__email', 'code')
     ordering = ('-created_at',)

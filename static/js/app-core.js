@@ -29,10 +29,6 @@ const TIMER_CIRCUMFERENCE = 283;
 const DEFAULT_TIME_LIMIT = 60;
 const THEME_STORAGE_KEY = 'quizflow-theme';
 const DEFAULT_THEME = 'light';
-const FAQS_FILE_PATH = '/static/json/faqs.json';
-const TERMS_OF_USE_FILE_PATH = '/static/json/terms-of-use.json';
-const LANDING_FAQ_PREVIEW_COUNT = 2;
-const LANDING_TERMS_PREVIEW_COUNT = 2;
 const QUIZZES_PER_PAGE = 15;
 const QUIZ_URL_STATE_KEYS = Object.freeze({
     search: 'search',
@@ -225,67 +221,7 @@ function initResponsiveNav() {
 }
 
 function initFooterEnhancements() {
-    const footers = document.querySelectorAll('.site-footer');
-    if (!footers.length) {
-        return;
-    }
-
-    footers.forEach(footer => {
-        if (footer.dataset.enhanced === 'true') {
-            return;
-        }
-
-        const brand = footer.querySelector('.site-footer__brand');
-        const links = footer.querySelector('.site-footer__links');
-        const meta = footer.querySelector('.site-footer__meta');
-
-        if (!brand || !links || !meta) {
-            return;
-        }
-
-        const topBlock = document.createElement('div');
-        topBlock.className = 'site-footer__top';
-
-        const socialBlock = document.createElement('div');
-        socialBlock.className = 'site-footer__social';
-        socialBlock.innerHTML = `
-            <p class="site-footer__social-label">Sosyal Medya Adresleri</p>
-            <div class="site-footer__social-links">
-                <a class="site-footer__social-link" href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
-                    <i class="ph ph-x-logo"></i>
-                </a>
-                <a class="site-footer__social-link" href="https://t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                    <i class="ph ph-telegram-logo"></i>
-                </a>
-                <a class="site-footer__social-link" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <i class="ph ph-youtube-logo"></i>
-                </a>
-                <a class="site-footer__social-link" href="https://www.whatsapp.com" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                    <i class="ph ph-whatsapp-logo"></i>
-                </a>
-            </div>
-        `;
-
-        topBlock.append(brand, socialBlock);
-
-        const bottomBlock = document.createElement('div');
-        bottomBlock.className = 'site-footer__bottom';
-
-        const topButton = document.createElement('button');
-        topButton.type = 'button';
-        topButton.className = 'site-footer__top-button';
-        topButton.setAttribute('aria-label', 'Sayfanın başına dön');
-        topButton.innerHTML = '<i class="ph ph-arrow-up"></i>';
-        topButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        bottomBlock.append(links, topButton);
-
-        footer.innerHTML = '';
-        footer.append(topBlock, bottomBlock, meta);
-        footer.dataset.enhanced = 'true';
-    });
+    return;
 }
 
 function getPreferredTheme() {
@@ -352,121 +288,8 @@ function getCurrentFilename() {
 }
 
 async function initInfoContent(filename) {
-    const needsFaqContent = filename === 'index.html' || filename === 'sss.html';
-    const needsTermsContent = filename === 'index.html' || filename === 'kullanim-sartlari.html';
-
-    if (!needsFaqContent && !needsTermsContent) {
-        return;
-    }
-
-    const loaders = [];
-
-    if (needsFaqContent) {
-        loaders.push(loadFaqContent(filename));
-    }
-
-    if (needsTermsContent) {
-        loaders.push(loadTermsOfUseContent(filename));
-    }
-
-    await Promise.all(loaders);
+    return;
 }
-
-async function loadFaqContent(filename) {
-    const payload = await loadJsonPayload(FAQS_FILE_PATH);
-    if (!payload || !Array.isArray(payload.faqs)) {
-        return;
-    }
-
-    const faqItems = sanitizeFaqItems(payload.faqs);
-    if (!faqItems.length) {
-        return;
-    }
-
-    if (filename === 'index.html') {
-        renderFaqItems('landingFaqList', faqItems.slice(0, LANDING_FAQ_PREVIEW_COUNT), true);
-    }
-
-    if (filename === 'sss.html') {
-        renderFaqItems('faqList', faqItems, true);
-    }
-}
-
-async function loadTermsOfUseContent(filename) {
-    const payload = await loadJsonPayload(TERMS_OF_USE_FILE_PATH);
-    if (!payload || !Array.isArray(payload.terms)) {
-        return;
-    }
-
-    const termItems = sanitizeTermsItems(payload.terms);
-    if (termItems.length) {
-        if (filename === 'index.html') {
-            renderTermsItems('landingTermsList', termItems.slice(0, LANDING_TERMS_PREVIEW_COUNT));
-        }
-
-        if (filename === 'kullanim-sartlari.html') {
-            renderTermsItems('termsList', termItems);
-        }
-    }
-
-    if (filename === 'kullanim-sartlari.html' && payload.note) {
-        renderTermsNote('termsNote', payload.note);
-    }
-}
-
-async function loadJsonPayload(filePath) {
-    try {
-        const response = await fetch(filePath, { cache: 'no-store' });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.warn(`${filePath} yüklenemedi:`, error);
-        return null;
-    }
-}
-
-function sanitizeFaqItems(items) {
-    if (!Array.isArray(items)) {
-        return [];
-    }
-
-    return items
-        .map(item => ({
-            question: typeof item.question === 'string' ? item.question.trim() : '',
-            answer: typeof item.answer === 'string' ? item.answer.trim() : ''
-        }))
-        .filter(item => item.question && item.answer);
-}
-
-function sanitizeTermsItems(items) {
-    if (!Array.isArray(items)) {
-        return [];
-    }
-
-    return items
-        .map(item => ({
-            title: typeof item.title === 'string' ? item.title.trim() : '',
-            description: typeof item.description === 'string' ? item.description.trim() : ''
-        }))
-        .filter(item => item.title && item.description);
-}
-
-function renderFaqItems(containerId, items, openFirstItem = false) {
-    const container = document.getElementById(containerId);
-    if (!container || !Array.isArray(items) || !items.length) {
-        return;
-    }
-
-    container.innerHTML = items.map((item, index) => `
-        <details class="faq-item"${openFirstItem && index === 0 ? ' open' : ''}>
-            <summary>${escapeHtml(item.question)}</summary>
-            <p>${escapeHtml(item.answer)}</p>
-        </details>
-    `).join('');
-}
-
 
 function setupFaqAccordion(container, openFirstItem = false) {
     if (!container) {
@@ -507,61 +330,6 @@ function initFaqAccordions(filename) {
     }
 }
 
-function renderTermsItems(containerId, items) {
-    const container = document.getElementById(containerId);
-    if (!container || !Array.isArray(items) || !items.length) {
-        return;
-    }
-
-    container.innerHTML = items.map(item => `
-        <article class="terms-item">
-            <h4>${escapeHtml(item.title)}</h4>
-            <p>${escapeHtml(item.description)}</p>
-        </article>
-    `).join('');
-}
-
-function renderTermsNote(elementId, noteData) {
-    const noteElement = document.getElementById(elementId);
-    if (!noteElement) {
-        return;
-    }
-
-    if (typeof noteData === 'string') {
-        const normalizedText = noteData.trim();
-        if (!normalizedText) {
-            return;
-        }
-
-        noteElement.textContent = normalizedText;
-        return;
-    }
-
-    if (!noteData || typeof noteData !== 'object') {
-        return;
-    }
-
-    const prefix = typeof noteData.prefix === 'string' ? noteData.prefix.trim() : '';
-    const linkLabel = typeof noteData.linkLabel === 'string' ? noteData.linkLabel.trim() : '';
-    const linkHref = typeof noteData.linkHref === 'string' ? noteData.linkHref.trim() : '';
-    const suffix = typeof noteData.suffix === 'string' ? noteData.suffix.trim() : '';
-
-    if (!prefix && !linkLabel && !suffix) {
-        return;
-    }
-
-    if (!linkLabel || !linkHref) {
-        noteElement.textContent = [prefix, suffix].filter(Boolean).join(' ').trim();
-        return;
-    }
-
-    noteElement.innerHTML = `
-        ${escapeHtml(prefix)}
-        <a class="auth-link" href="${escapeHtml(linkHref)}">${escapeHtml(linkLabel)}</a>
-        ${escapeHtml(suffix)}
-    `.replace(/\s+/g, ' ').trim();
-}
-
 function escapeHtml(value) {
     return String(value)
         .replace(/&/g, '&amp;')
@@ -586,11 +354,11 @@ async function loadQuizData() {
     }
 
     try {
-        const response = await axios.get('/static/json/data.json');
+        const response = await axios.get('/api/quizzes/');
         const payload = response.data;
 
         if (!payload || !Array.isArray(payload.quizzes)) {
-            throw new Error('data.json formatı geçersiz.');
+            throw new Error('Quiz API formatı geçersiz.');
         }
 
         quizData = {
