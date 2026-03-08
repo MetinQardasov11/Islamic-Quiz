@@ -79,7 +79,8 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         }),
         ('Logo', {
             'fields': (
-                ('site_logo_source_mode', 'site_logo_file'),
+                'site_logo_source_mode',
+                'site_logo_file',
                 'site_logo',
             ),
         }),
@@ -87,7 +88,8 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             'fields': (
                 'hero_title',
                 'hero_description',
-                ('hero_image_source_mode', 'hero_image_file'),
+                'hero_image_source_mode',
+                'hero_image_file',
                 'hero_image',
             ),
         }),
@@ -141,7 +143,8 @@ class HomeFeatureAdmin(admin.ModelAdmin):
     fields = (
         'title',
         'description',
-        ('image_source_mode', 'image_file'),
+        'image_source_mode',
+        'image_file',
         'image',
         ('display_order', 'is_active'),
     )
